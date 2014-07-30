@@ -30,7 +30,6 @@ class CustomersController extends AppController {
 		
 		// if we get the post information, try to authenticate
 		if ($this->request->is('post')) {
-                                $this->log($this->request->data, 'debug');
 			if ($this->Auth->login()) {
 				$this->Session->setFlash(__('Welcome, '. $this->Auth->customer('username')));
 				$this->redirect($this->Auth->redirectUrl());
