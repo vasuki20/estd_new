@@ -3,7 +3,7 @@
     'Add MoTbl',
     array('controller' => 'MoTbls', 'action' => 'add')
 ); ?>
-<h1>Blog MoTbls</h1>
+<h2>MoTbls</h2>
 <table>
     <tr>
         <th>Id</th>

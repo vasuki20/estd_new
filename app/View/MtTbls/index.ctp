@@ -3,7 +3,8 @@
     'Add MtTbl',
     array('controller' => 'MtTbls', 'action' => 'add')
 ); ?>
-<h1>Blog MtTbls</h1>
+
+<h2>MtTbls</h2>
 <table>
     <tr>
         <th>Id</th>

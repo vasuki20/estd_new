@@ -4,10 +4,10 @@ class PostsController extends AppController {
     public $components = array('Session');
 
     public function index() {
-        $this->set('posts', $this->Post->find('all'));
+        $this->set('customers', $this->Customer->find('all'));
     }
 
-    public function view($id) {
+   /* public function view($id) {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -17,10 +17,11 @@ class PostsController extends AppController {
             throw new NotFoundException(__('Invalid post'));
         }
         $this->set('post', $post);
-    }
+    }*/
 
     public function add() {
         if ($this->request->is('post')) {
+            //Added this line
             $this->request->data['Post']['user_id'] = $this->Auth->customer('id');
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been saved.'));

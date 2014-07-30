@@ -9,7 +9,7 @@ class Post extends AppModel {
         )
     );
  public function isOwnedBy($post, $customer) {
-    return $this->field('id', array('id' => $post, 'user_id' => $customer)) !== false;
+    return $this->field('id', array('id' => $customer, 'user_id' => $customer)) !== false;
 }
 }
 

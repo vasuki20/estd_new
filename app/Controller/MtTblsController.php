@@ -1,4 +1,6 @@
 <?php
+App::uses('AppModel', 'Model');
+App::import('model','MtTbl');
 class MtTblsController  extends AppController {
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session');
@@ -12,6 +14,35 @@ class MtTblsController  extends AppController {
 )));
     }
 
+    
+    public function add() {
+        if ($this->request->is('post')) {
+            $saveData=$this->request->data;
+            $telcoId = $saveData['MtTbl']['telcoId'];
+            $subscriberId = $saveData['MtTbl']['subscriberId'];
+            $msisdn = $saveData['MtTbl']['msisdn'];
+            $mtId = $saveData['MtTbl']['mtId'];
+            $moId = $saveData['MtTbl']['moId'];
+            $moLinkId = $saveData['MtTbl']['moLinkId'];
+            $dnId = $saveData['MtTbl']['dnId'];
+            $apiUserId = $saveData['MtTbl']['apiUserId'];
+            $txnId = $saveData['MtTbl']['txnId'];
+            $keyword = $saveData['MtTbl']['keyword'];
+            $request = $saveData['MtTbl']['request'];
+            $response = $saveData['MtTbl']['response'];
+            $this->log($this->request->data, 'debug');
+
+            $status = $this->MtTbl->addMT($telcoId, $subscriberId, $msisdn, $mtId, $moId, $moLinkId, $dnId, $apiUserId, $txnId, $keyword, $request, $response);
+
+            if ($status === 1) {
+                $this->Session->setFlash(__('Your MtTbl has been saved.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Unable to add your MtTbl.'));
+            }
+        }
+    }
+    /*
 	public function add() {
         if ($this->request->is('post')) {
             $this->MtTbl->create();
@@ -23,7 +54,7 @@ class MtTblsController  extends AppController {
             $this->Session->setFlash(__('Unable to add your MtTbl.'));
         }
     }
-	
+	*/
 	public function edit($id = null) {
     if (!$id) {
         throw new NotFoundException(__('Invalid post'));

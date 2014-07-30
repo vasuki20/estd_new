@@ -75,6 +75,37 @@ public $validate = array(
 			),
 		),
 	);
+
+public function addMT($telcoId, $subscriberId, $msisdn, $mtId, $moId, $moLinkId, $dnId, $apiUserId, $txnId, $keyword, $request, $response) {
+        $status;
+        $this->log($telcoId, 'debug');
+        /* if($query->insert([ 'telcoId', 'subscriberId', 'msisdn', 'moId', 'moLinkId', 'apiUserId', 'txnId', 'keyword', 'request', 'response'])
+          ->values([$telcoId, $subscriberId, $msisdn, $moId, $moLinkId, $apiUserId, $txnId, $keyword, $request, $response])
+          ->execute()) */
+
+        if ($this->save(
+                        array(
+                            'telcoId' => $telcoId,
+                            'subscriberId' => $subscriberId,
+                            'msisdn' => $msisdn,
+                            'mtId' => $mtId,
+                            'moId' => $moId,
+                            'moLinkId' => $moLinkId,
+                            'dnId' => $dnId,
+                            'apiUserId' => $apiUserId,
+                            'txnId' => $txnId,
+                            'keyword' => $keyword,
+                            'request' => $request,
+                            'response' => $response
+                        )
+                )) {
+            $status = 1;
+        } 
+        else {
+            $status = 0;
+        }
+        return $status;
+    }
 	
 }
 ?>
