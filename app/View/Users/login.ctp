@@ -1,15 +1,13 @@
-<!-- File: /app/View/Posts/add.ctp -->
-
-<h1>Add Post</h1>
-<?php
-echo $this->Form->create('User');
-echo $this->Form->input('Role', array("options"=>$Role));
-echo $this->Form->input('FirstName');
-echo $this->Form->input('LastName');
-echo $this->Form->input('emailId');
-echo $this->Form->input('password');
-echo $this->Form->input('contactno');
-echo $this->Form->input('Telconame', array("options"=>$Telconame));
-echo $this->Form->input('IsActive', array("options"=>$Isactive));
-echo $this->Form->end('Save Post');
-?>
+<div class="users form">
+<?php echo $this->Session->flash('auth'); ?>
+<?php echo $this->Form->create('User'); ?>
+    <fieldset>
+        <legend>
+            <?php echo __('Please enter your username and password'); ?>
+        </legend>
+        <?php echo $this->Form->input('username');
+        echo $this->Form->input('password');
+    ?>
+    </fieldset>
+<?php echo $this->Form->end(__('Login')); ?>
+</div>

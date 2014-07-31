@@ -16,8 +16,8 @@
 
             <ul>
                 <?php
-                if ($Role == 'Admin') {
-                    echo "<li ><?php echo $this->Html->link(__('Add User'), array('action' => 'add'));?></li>";
+                if ($Role['Role'] == 'Admin') {
+                    echo "<li >".$this->Html->link(__('Add User'), array('action' => 'add'))."</li>";
                 }
                 ?>
 
@@ -59,7 +59,11 @@
                 <th>Created_date</th>
                 <th>Modified_date</th>
                 <th>Edit</th>
-                <th>Delete</th>
+                <?php
+                if ($Role['Role'] == 'Admin') {
+                    echo '<th>Delete</th>';
+                }
+                ?>
             </tr>
             <!-- Here is where we loop through our $posts array, printing out post info -->
             <?php foreach ($Users as $User): ?>
@@ -94,7 +98,7 @@
                     <td>
 
                         <?php
-                        if ($Role == 'Admin') {
+                        if ($Role['Role'] == 'Admin') {
                             echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['u']['id']), null, __('Are you sure you want to delete # %s?', $User['u']['id']));
                         }
                         ?>
@@ -103,8 +107,8 @@
 
                 </tr>
 
-<?php endforeach; ?>
-<?php unset($User); ?>
+            <?php endforeach; ?>
+            <?php unset($User); ?>
         </table>
 
 
