@@ -32,32 +32,28 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     
-	// added the debug toolkit
-	// sessions support
-	// authorization for login and logut redirect
-	public $components = array(
-		'DebugKit.Toolbar',
-		'Session',
+	 public $components = array(
+        'Session',
         'Auth' => array(
-            'loginRedirect' => array('controller' => 'customers', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'customers', 'action' => 'login'),
-			'authError' => 'You must be logged in to view this page.',
-			'loginError' => 'Invalid Username or Password entered, please try again.'
- 
-        ));
-	
-	// only allow the login controllers only
-	public function beforeFilter() {
-        $this->Auth->allow('login');
-    }
-	
-	public function isAuthorized($customer) {
-		// Here is where we should verify the role and give access based on role
-		
-		return true;
-                
-                
-	}
+            'loginRedirect' => array(
+                'controller' => 'users',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'users',
+                'action' => 'login'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
+
+//    public function beforeFilter() {
+//        $this->set('loggedIn', $this->Auth->loggedIn());
+//    }
      
 }
 
