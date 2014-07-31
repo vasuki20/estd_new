@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application level Controller
  *
@@ -18,7 +19,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 App::uses('Controller', 'Controller');
 
 /**
@@ -31,36 +31,48 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    
-	// added the debug toolkit
-	// sessions support
-	// authorization for login and logut redirect
-	public $components = array(
-		'DebugKit.Toolbar',
-		'Session',
+
+    public $helpers = array('Html', 'Form');
+    public $components = array(
+        'Session',
         'Auth' => array(
-            'loginRedirect' => array('controller' => 'customers', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'customers', 'action' => 'login'),
-			'authError' => 'You must be logged in to view this page.',
-			'loginError' => 'Invalid Username or Password entered, please try again.'
- 
-        ));
-	
-	// only allow the login controllers only
-	public function beforeFilter() {
-        $this->Auth->allow('login');
+            'loginRedirect' => array(
+                'controller' => 'Users',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'Users',
+                'action' => 'login',
+                'home'
+            ),
+            'authorize' => array('Controller'),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
+
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Default deny
+        return false;
     }
-	
-	public function isAuthorized($customer) {
-		// Here is where we should verify the role and give access based on role
-		
-		return true;
-                
-                
-	}
-     
+
+    public function beforeFilter() {
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->authenticate = array(
+            AuthComponent::ALL => array(
+                'userModel' => 'User',
+                'fields' => array('Username' => 'username', 'Password' => 'password')),
+            'Basic',
+            'Form');
+        $this->Auth->allow('index', 'view');
+    }
+
 }
-
-
-
-

@@ -13,9 +13,12 @@
 <body>
 
 <div id='cssmenu'>
-    
+   <?php 
+echo $this->Html->link( "Logout",   array('action'=>'logout') ); 
+?> 
 <ul>
-   <li class='active'><?php echo $this->Html->link(__('Add User'), array('action' => 'add'));?></li>
+   <li class='active'><?php echo $this->Html->link(__('Admin'), array('action' => 'index'));?></li>
+   <li> <?php echo $this->Html->link(__('Add User'), array('action' => 'add'));?></li>
    <li> <?php echo $this->Html->link(__('Reporting'), array('action' => 'report'));?></li>
    
 </ul>
@@ -48,9 +51,10 @@ echo '</div>';
         <th>Role</th>
         <th>FirstName</th>
         <th>LastName</th>
-        <th>emailID</th>
-        <th>password</th>
-        <th>contactno</th>
+        <th>Username</th>
+        <th>EmailID</th>       
+        <th>Password</th>
+        <th>ContactNo</th>
         <th>Telconame</th>
         <th>IsActive</th>
         <th>Created_date</th>
@@ -74,7 +78,8 @@ echo '</div>';
             <td><?php echo $User['r']['Role']; ?></td>
             <td><?php echo $User['u']['FirstName']; ?></td>
             <td><?php echo $User['u']['LastName']; ?></td>
-            <td><?php echo $User['u']['emailId']; ?></td>
+            <td><?php echo $User['u']['username']; ?></td>
+            <td><?php echo $User['u']['emailId']; ?></td>  
             <td><?php echo $User['u']['password']; ?></td>
             <td><?php echo $User['u']['contactno']; ?></td>
             <td><?php echo $User['t']['Telconame']; ?></td>

@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 class User extends AppModel {
-
+   var $name = 'User';
     public $belongsTo = array(
         'Role' => array(
             'className' => 'Role',
@@ -31,6 +31,29 @@ class User extends AppModel {
             'order' => ''
         )
     );
+    
+    public $validate = array(
+        'username' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'A username is required'
+            )
+        ),
+        'password' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'A password is required'
+            )
+        ),
+        'role' => array(
+            'valid' => array(
+                
+                'message' => 'Please enter a valid role',
+                'allowEmpty' => false
+            )
+        )
+    );
+        
 
 }
 

@@ -13,6 +13,7 @@ echo '<table id="user_table" cellpadding="0" cellspacing="0">
 echo "<tr><td class=\"columnName\">Role:</td><td class=\"userDetailsValues\">".$User['User']['Role']."</td></tr>";
 echo "<tr><td class=\"columnName\">First Name:</td><td class=\"userDetailsValues\">".$User['User']['FirstName']."</td></tr>";
 echo "<tr><td class=\"columnName\">Last Name:</td><td class=\"userDetailsValues\">".$User['User']['LastName']."</td></tr>";
+echo "<tr><td class=\"columnName\">Username:</td><td class=\"userDetailsValues\">".$User['User']['username']."</td></tr>";
 echo "<tr><td class=\"columnName\">Email Id:</td><td class=\"userDetailsValues\">".$User['User']['emailId']."</td></tr>";
 echo "<tr><td class=\"columnName\">Password:</td><td class=\"userDetailsValues\">".$User['User']['password']."</td></tr>";
 echo "<tr><td class=\"columnName\">Contact No:</td><td class=\"userDetailsValues\">".$User['User']['contactno']."</td></tr>";
