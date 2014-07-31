@@ -51,9 +51,10 @@ class AppController extends Controller {
         )
     );
 
-//    public function beforeFilter() {
-//        $this->set('loggedIn', $this->Auth->loggedIn());
-//    }
+    public function beforeFilter() {
+        $this->Auth->allow('index', 'view');
+        $this->set('loggedIn', $this->Auth->loggedIn());
+    }
      
 }
 

@@ -1,6 +1,5 @@
 <?php
-class CustomersController extends AppController {
-
+class CustomersController extends AppController {  
 	public $paginate = array(
         'limit' => 25,
         'conditions' => array('status' => '1'),
@@ -31,7 +30,7 @@ class CustomersController extends AppController {
 		// if we get the post information, try to authenticate
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				$this->Session->setFlash(__('Welcome, '. $this->Auth->customer('username')));
+				$this->Session->setFlash(__('Welcome, '. $this->Auth->Customer('username')));
 				$this->redirect($this->Auth->redirectUrl());
 			} else {
 				$this->Session->setFlash(__('Invalid username or password'));

@@ -9,7 +9,7 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
  * and open the template in the editor.
  */
 class User extends AppModel {
-
+   var $name = 'User';
     public $belongsTo = array(
         'Role' => array(
             'className' => 'Role',
@@ -34,6 +34,7 @@ class User extends AppModel {
         )
     );
     
+<<<<<<< HEAD
     public function beforeSave($options = array()) {
     if (isset($this->data[$this->alias]['password'])) {
         $passwordHasher = new BlowfishPasswordHasher();
@@ -43,6 +44,30 @@ class User extends AppModel {
     }
     return true;
 }
+=======
+    public $validate = array(
+        'username' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'A username is required'
+            )
+        ),
+        'password' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'A password is required'
+            )
+        ),
+        'role' => array(
+            'valid' => array(
+                
+                'message' => 'Please enter a valid role',
+                'allowEmpty' => false
+            )
+        )
+    );
+        
+>>>>>>> 06814b0fbd59e04f9e1ad36033372e420d248a8c
 
 }
 

@@ -59,11 +59,7 @@
                 <th>Created_date</th>
                 <th>Modified_date</th>
                 <th>Edit</th>
-                <?php
-                if ($Role == 'Admin') {
-                    echo '<th>Delete</th>';
-                }
-                ?>
+                <th>Delete</th>
             </tr>
             <!-- Here is where we loop through our $posts array, printing out post info -->
             <?php foreach ($Users as $User): ?>
@@ -107,8 +103,8 @@
 
                 </tr>
 
-            <?php endforeach; ?>
-            <?php unset($User); ?>
+<?php endforeach; ?>
+<?php unset($User); ?>
         </table>
 
 
