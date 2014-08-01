@@ -44,16 +44,17 @@
         echo $this->Form->end('Search');
         echo '</div>';
         ?>
-
+         <?php $this->log($Users, 'debug');?>
         <table>
             <tr>
                 <th>ID</th>
                 <th>Role</th>
                 <th>FirstName</th>
                 <th>LastName</th>
-                <th>emailID</th>
-                <th>password</th>
-                <th>contactno</th>
+                <th>Username</th>
+                <th>EmailID</th>
+                <th>Password</th>
+                <th>ContactNo</th>
                 <th>Telconame</th>
                 <th>IsActive</th>
                 <th>Created_date</th>
@@ -66,7 +67,9 @@
                 ?>
             </tr>
             <!-- Here is where we loop through our $posts array, printing out post info -->
+            
             <?php foreach ($Users as $User): ?>
+            
                 <tr>
                     <td>
                         <?php
@@ -81,6 +84,7 @@
                     <td><?php echo $User['r']['Role']; ?></td>
                     <td><?php echo $User['u']['FirstName']; ?></td>
                     <td><?php echo $User['u']['LastName']; ?></td>
+                    <td><?php echo $User['u']['username']; ?> </td>
                     <td><?php echo $User['u']['emailId']; ?></td>
                     <td><?php echo $User['u']['password']; ?></td>
                     <td><?php echo $User['u']['contactno']; ?></td>
@@ -90,14 +94,16 @@
                     <td><?php echo $User['u']['modified']; ?></td>
                     <td>
                         <?php
+                        
                         echo $this->Html->link(
-                                'Edit', array('action' => 'edit', $User['u']['id'])
-                        );
+                                'Edit', array('action' => 'edit', $User['u']['id']));
+                        
                         ?>
                     </td>
                     <td>
 
                         <?php
+                        
                         if ($Role['Role'] == 'Admin') {
                             echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['u']['id']), null, __('Are you sure you want to delete # %s?', $User['u']['id']));
                         }

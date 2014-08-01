@@ -27,10 +27,10 @@ class UsersController extends AppController {
     public function index() {
         $Role = AuthComponent::user('Role');
         $this->log($Role['Role'], 'debug');
-        
+
         $this->set('Role', $Role);
-        
-        $queryString = 'select u.id, r.Role, u.FirstName, u.LastName, u.emailId, u.password, u.contactno, t.Telconame, i.IsActive, u.created, u.modified
+
+        $queryString = 'select u.id, r.Role, u.FirstName, u.LastName,u.username, u.emailId, u.password, u.contactno, t.Telconame, i.IsActive, u.created, u.modified
 from users u, Roles r, IsActives i, telconames t 
 where u.role=r.id and u.isactive=i.id and u.telconame=t.id and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
         $this->log($queryString, 'debug');
@@ -39,10 +39,10 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and ("' . $Role['Role
             $this->log($this->request->data['User']['SearchParam'], 'debug');
             if ($this->request->data) {
                 $searchParam = $this->request->data['User']['SearchParam'];
-                $searchQuery="select u.id, r.Role, u.FirstName, u.LastName, u.emailId, u.password, u.contactno, t.Telconame, i.IsActive, u.created, u.modified
+                $searchQuery = "select u.id, r.Role, u.FirstName, u.LastName,u.username, u.emailId, u.password, u.contactno, t.Telconame, i.IsActive, u.created, u.modified
 from users u, Roles r, IsActives i, telconames t 
 where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$searchParam%' or u.FirstName like '%$searchParam%' or u.lastname like '%$searchParam%' or u.emailid like '%$searchParam%'"
-                                . " or t.telconame like '%$searchParam%' or r.role like '%$searchParam%' or i.isActive like '%$searchParam%')".'and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
+                        . " or t.telconame like '%$searchParam%' or r.role like '%$searchParam%' or i.isActive like '%$searchParam%')" . 'and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
                 $this->log($searchQuery, 'debug');
                 $this->set('Users', $this->User->query($searchQuery));
             } else {
@@ -82,6 +82,10 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
     }
 
     public function edit($id = null) {
+        $Role = AuthComponent::user('Role');
+        $this->log($Role['Role'], 'debug');
+
+        $this->set('Role', $Role);
         $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
         $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
         $this->set('Isactive', $this->User->Isactive->find('list', array('fields' => array('Isactive'))));

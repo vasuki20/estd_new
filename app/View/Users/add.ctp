@@ -17,7 +17,6 @@ echo $this->Form->input('Telconame', array("options"=>$Telconame));
 echo $this->Form->input('IsActive', array("options"=>$Isactive));
 echo $this->Form->end('Save Post');
     
-
 ?>
 
 
