@@ -7,8 +7,9 @@
 
 <?php
 echo $this->Form->create('User');
- if ($Role['Role'] != 'Admin') {
-   echo $this->Form->input('Role', array("options" => $Role, 'type'=>'hidden', 'disabled' => 'disabled'));  
+
+ if ($CurrentRole['Role'] == 'Admin') {
+   echo $this->Form->input('Role', array("options"=>$Role));
  }
 echo $this->Form->input('FirstName');
 echo $this->Form->input('LastName');

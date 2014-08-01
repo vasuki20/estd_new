@@ -85,7 +85,7 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
         $Role = AuthComponent::user('Role');
         $this->log($Role['Role'], 'debug');
 
-        $this->set('Role', $Role);
+        $this->set('CurrentRole', $Role);
         $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
         $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
         $this->set('Isactive', $this->User->Isactive->find('list', array('fields' => array('Isactive'))));
