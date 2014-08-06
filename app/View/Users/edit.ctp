@@ -3,13 +3,10 @@
 <div id='cssmenu'>
     <ul>
         <li> <?php echo $this->Html->link(__('Home'), array('action' => 'index')); ?></li>
-        <li class = active > <?php echo $this->Html->link(__('Edit User'), array('action' => 'edit')); ?></li>
+        <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
     </ul>
 </div>
 
-<div id="logoutBtn" style="float: right;">
-    <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>
-</div>
 
 <?php
 echo $this->Form->create('User');

@@ -1,3 +1,12 @@
+<div id='cssmenu'>
+    <ul>
+        <?php echo "<li >" . $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index')) . "</li>"; ?></li>
+        <li> <?php echo $this->Html->link(__('Daily Report'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
+        <?php echo "<li class = active>" . $this->Html->link(__('Weekly Report'), array('controller' => 'reports', 'action' => 'export_week/display')) . "</li>"; ?></li>
+        <?php echo "<li >" . $this->Html->link(__('Monthly Report'), array('controller' => 'reports', 'action' => 'export_month/display')) . "</li>"; ?></li>
+    <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+    </ul>
+</div>
 <div class="sessionTokens">
 <h2><?php  echo __('Reports');?></h2>
 
