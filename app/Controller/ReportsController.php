@@ -82,7 +82,7 @@ class ReportsController extends AppController {
 			$this->set("active_subscribers", $active_subscribers);
 			
 			$all_subscribers_by_channel = $this->Subscriber->find("all", array(
-				'fields' => "Subscription.subscription_channel, Subscription.subscription_name, count(Subscriber.id) as counter, (SELECT COUNT(DISTINCT Subscriber.id) AS `count` FROM `yoonic_cis`.`Subscribers` AS `Subscriber` LEFT JOIN `yoonic_cis`.`subscriptions` AS `Subscription1` ON (`Subscriber`.`id` = `Subscription1`.`Subscriber_id`) LEFT JOIN `yoonic_cis`.`telcos` AS `Telco` ON (`Subscriber`.`telco_id` = `Telco`.`id`) WHERE ((`Subscription1`.`status` = 'inactive') OR (`Subscription1`.`status` IS NULL)) and `Subscription`.`subscription_channel` = `Subscription1`.`subscription_channel` and `Subscriber`.`telco_id` = ".$_SESSION["Auth"]["User"]["telco_id"].") as counter_inactive, (SELECT COUNT(DISTINCT Subscriber.id) AS `count` FROM `yoonic_cis`.`Subscribers` AS `Subscriber` INNER JOIN `yoonic_cis`.`subscriptions` AS `Subscription2` ON (`Subscriber`.`id` = `Subscription2`.`Subscriber_id`) LEFT JOIN `yoonic_cis`.`telcos` AS `Telco` ON (`Subscriber`.`telco_id` = `Telco`.`id`) WHERE `Subscription2`.`status` = 'active' and `Subscription`.`subscription_channel` = `Subscription2`.`subscription_channel` and `Subscriber`.`telco_id` = ".$_SESSION["Auth"]["User"]["telco_id"].") as counter_active",
+				'fields' => "Subscription.subscription_channel, Subscription.subscription_name, count(Subscriber.id) as counter, (SELECT COUNT(DISTINCT Subscriber.id) AS `count` FROM `registration`.`Subscribers` AS `Subscriber` LEFT JOIN `registration`.`subscriptions` AS `Subscription1` ON (`Subscriber`.`id` = `Subscription1`.`Subscriber_id`) LEFT JOIN `registration`.`telcos` AS `Telco` ON (`Subscriber`.`telco_id` = `Telco`.`id`) WHERE ((`Subscription1`.`status` = 'inactive') OR (`Subscription1`.`status` IS NULL)) and `Subscription`.`subscription_channel` = `Subscription1`.`subscription_channel` and `Subscriber`.`telco_id` = ".$_SESSION["Auth"]["User"]["telco_id"].") as counter_inactive, (SELECT COUNT(DISTINCT Subscriber.id) AS `count` FROM `registration`.`Subscribers` AS `Subscriber` INNER JOIN `registration`.`subscriptions` AS `Subscription2` ON (`Subscriber`.`id` = `Subscription2`.`Subscriber_id`) LEFT JOIN `registration`.`telcos` AS `Telco` ON (`Subscriber`.`telco_id` = `Telco`.`id`) WHERE `Subscription2`.`status` = 'active' and `Subscription`.`subscription_channel` = `Subscription2`.`subscription_channel` and `Subscriber`.`telco_id` = ".$_SESSION["Auth"]["User"]["telco_id"].") as counter_active",
 					'joins' => array(
 						array(
 							'table'=>'subscriptions',
@@ -753,7 +753,9 @@ class ReportsController extends AppController {
 			$this->set("last_week", $last_week);
 
 			//End of initialization
-
+                                   
+                        
+                               $this->log($this->request->data, 'debug');
 
 				$total_subscribers_list = $this->Subscriber->find("all", array('conditions'=>array('Subscriber.telco_id' => $telco_id)));
 				
