@@ -313,21 +313,25 @@ form div.submit {
 	margin-top: 10px;
 }
 label {
-	display: block;
 	font-size: 110%;
-	margin-bottom:3px;
+        margin-bottom: 3px;
+        width: 100px !important;
+        margin-right: 10%;
+        display: inline-block;
+        color: rgb(184, 13, 13);
 }
 input, textarea {
 	clear: both;
 	font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
 	padding: 1%;
-	width:98%;
+        width: 300px;
 }
 select {
 	clear: both;
 	font-size: 120%;
 	vertical-align: text-bottom;
+        width: 325px;
 }
 select[multiple=multiple] {
 	width: 100%;
