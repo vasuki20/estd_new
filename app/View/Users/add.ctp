@@ -1,6 +1,13 @@
 <!-- File: /app/View/Posts/add.ctp -->
 
-<h1>Add Post</h1>
+<div id='cssmenu'>
+    <ul>
+
+        <li> <?php echo $this->Html->link(__('Home'), array('action' => 'index')); ?></li>
+        <li class = active > <?php echo $this->Html->link(__('Add User'), array('action' => 'add')); ?></li>
+        
+    </ul>
+    </div>
 <div id="logoutBtn" style="float: right;">
 <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>
 </div>

@@ -1,5 +1,5 @@
 <?php
-
+App::uses('AppController', 'Controller');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -126,7 +126,10 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
             return $this->redirect(array('action' => 'index'));
         }
     }
-
+    
+  public function report(){
+      
+  }  
 }
 
 ?>

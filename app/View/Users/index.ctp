@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang=''>
     <head>
@@ -15,6 +14,7 @@
         <div id='cssmenu'>
 
             <ul>
+                <li class = active> <?php echo $this->Html->link(__('Home'), array('action' => 'index')); ?></li>
                 <?php
                 if ($Role['Role'] == 'Admin') {
                     echo "<li >".$this->Html->link(__('Add User'), array('action' => 'add'))."</li>";
@@ -97,7 +97,7 @@
                         
                         echo $this->Html->link(
                                 'Edit', array('action' => 'edit', $User['u']['id']));
-                        
+                     
                         ?>
                     </td>
                     <td>
