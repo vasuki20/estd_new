@@ -14,7 +14,10 @@
         <div id='cssmenu'>
 
             <ul>
+                 
                 <li class = active> <?php echo $this->Html->link(__('Daily Report'), array('action' => 'export')); ?></li>
+                 <li> <?php echo $this->Html->link(__('Daily Report'), array('controller' => 'Reports', 'action' => 'export_day')); ?></li>
                 <?php echo "<li >".$this->Html->link(__('Weekly Report'), array('action' => 'export_week'))."</li>";?></li>
                 <?php echo "<li >".$this->Html->link(__('Monthly Report'), array('action' => 'export_month'))."</li>";?></li>
-                
+                  </ul>
+        </div>

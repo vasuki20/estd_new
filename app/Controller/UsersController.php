@@ -1,17 +1,22 @@
 <?php
+
 App::uses('AppController', 'Controller');
 App::import('Controller', 'Reports'); // mention at top
+// We need to load the class
+$Reports = new ReportsController;
 
+// If we want the model associations, components, etc to be loaded
+$Reports->constructClasses();
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 class UsersController extends AppController {
     
-public $helpers = array('Html', 'Form');
+    public $helpers = array('Html', 'Form');
+ 
 
     public function login() {
         if ($this->request->is('post')) {
@@ -22,7 +27,7 @@ public $helpers = array('Html', 'Form');
             $this->Session->setFlash(__('Invalid username or password, try again'));
         }
     }
-   
+    
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
@@ -55,17 +60,14 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
     }
 
     public function add() {
-    $message = "Notification: New report submitted!";
-
-
+        $message = "Notification: New report submitted!";
 
 //Instantiation
-$Reports= new ReportsController;
+        $Reports = new ReportsController;
 //Call a method from SmsOutgoingsControllerwith parameter
-$Reports->notify_user($user_id, $message);
-    
+        $Reports->notify_user($user_id, $message);
 
-$this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
+        $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
         $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
         $this->set('Isactive', $this->User->Isactive->find('list', array('fields' => array('Isactive'))));
         if ($this->request->is('post')) {
@@ -139,10 +141,15 @@ $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => a
             return $this->redirect(array('action' => 'index'));
         }
     }
-    
-  public function report(){
-      
-  }  
+
+  public function export() {
+  $this->render('Reports.Reports/export_day');           
+}
+         
+    public function report() {
+        
+    }
+
 }
 
 ?>
