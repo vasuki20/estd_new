@@ -1,6 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 App::import('model','ApiUser');
+
 /**
  * Log Model
  *
@@ -232,8 +233,7 @@ class Log extends AppModel {
 		
 		return $log;
 	}
-	
-
+        
 	public function get_client_ip() {
 	     $ipaddress = '';
 	     if (isset($_SERVER['HTTP_CLIENT_IP']))

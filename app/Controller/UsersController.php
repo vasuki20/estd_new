@@ -1,5 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
+App::import('Controller', 'Reports'); // mention at top
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,8 +10,8 @@ App::uses('AppController', 'Controller');
  */
 
 class UsersController extends AppController {
-
-    public $helpers = array('Html', 'Form');
+    
+public $helpers = array('Html', 'Form');
 
     public function login() {
         if ($this->request->is('post')) {
@@ -19,7 +22,7 @@ class UsersController extends AppController {
             $this->Session->setFlash(__('Invalid username or password, try again'));
         }
     }
-
+   
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
@@ -52,7 +55,17 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
     }
 
     public function add() {
-        $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
+    $message = "Notification: New report submitted!";
+
+
+
+//Instantiation
+$Reports= new ReportsController;
+//Call a method from SmsOutgoingsControllerwith parameter
+$Reports->notify_user($user_id, $message);
+    
+
+$this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
         $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
         $this->set('Isactive', $this->User->Isactive->find('list', array('fields' => array('Isactive'))));
         if ($this->request->is('post')) {
