@@ -13,21 +13,23 @@ $Reports->constructClasses();
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 class UsersController extends AppController {
-    
+
     public $helpers = array('Html', 'Form');
- 
 
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->set('authUser', $this->Auth->user());
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect(
+                                array('controller' => 'users', 'action' => 'index')
+                );
             }
             $this->Session->setFlash(__('Invalid username or password, try again'));
         }
     }
-    
+
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
@@ -62,10 +64,7 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
     public function add() {
         $message = "Notification: New report submitted!";
 
-//Instantiation
-        $Reports = new ReportsController;
-//Call a method from SmsOutgoingsControllerwith parameter
-        $Reports->notify_user($user_id, $message);
+
 
         $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
         $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
@@ -140,14 +139,6 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
             );
             return $this->redirect(array('action' => 'index'));
         }
-    }
-
-  public function export() {
-  $this->render('Reports.Reports/export_day');           
-}
-         
-    public function report() {
-        
     }
 
 }

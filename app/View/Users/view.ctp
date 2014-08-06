@@ -1,5 +1,8 @@
-<div id="logoutBtn" style="float: right;">
-<?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>
+<div id='cssmenu'>
+    <ul>
+        <li> <?php echo $this->Html->link(__('Home'), array('action' => 'index')); ?></li>
+        <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+    </ul>
 </div>
 <?php 
 echo '<div>';
