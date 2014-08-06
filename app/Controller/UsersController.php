@@ -133,13 +133,21 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
             throw new MethodNotAllowedException();
         }
 
-
         if ($this->User->delete($id)) {
             $this->Session->setFlash(
                     __('The post with id: %s has been deleted.', h($id))
             );
             return $this->redirect(array('action' => 'index'));
         }
+    }
+    
+    public function export_month(){
+        
+             
+    }
+    
+    public function export_week(){
+    
     }
 
   public function export() {
