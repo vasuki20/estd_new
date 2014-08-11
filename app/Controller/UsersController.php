@@ -63,9 +63,6 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
 
     public function add() {
         $message = "Notification: New report submitted!";
-
-
-
         $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
         $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
         $this->set('Isactive', $this->User->Isactive->find('list', array('fields' => array('Isactive'))));
@@ -74,10 +71,10 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
             $this->log($this->request->data, 'debug');
             if ($this->User->save($this->request->data)) {
                 echo '$this->request->data';
-                $this->Session->setFlash(__('Your post has been saved.'));
+                $this->Session->setFlash(__('Your User has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to add your post.'));
+            $this->Session->setFlash(__('Unable to add your User.'));
         }
 //        $adminRoles = $this->Role->find('all');
 //        $isactives = $this->Isactive->find('all');
@@ -138,15 +135,6 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
             );
             return $this->redirect(array('action' => 'index'));
         }
-    }
-    
-    public function export_month(){
-        
-             
-    }
-    
-    public function export_week(){
-    
     }
 
 }

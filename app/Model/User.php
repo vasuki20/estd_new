@@ -9,7 +9,11 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
  * and open the template in the editor.
  */
 class User extends AppModel {
-
+    
+    // The below two included for including another table//
+      var $name = 'User';
+      var $useDbConfig = 'default';
+      
     public $belongsTo = array(
         'Role' => array(
             'className' => 'Role',
@@ -31,7 +35,13 @@ class User extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
+        ),
+        'Movies' => array(
+            'className' => 'Movies',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
     );
     
     public function beforeSave($options = array()) {
