@@ -15,8 +15,7 @@ App::uses('AppModel', 'Model');
  */
 class Channel extends AppModel {
     
-   var $name = 'Channel' ;
-   var $useDbConfig = 'yoonic';
+   public $useDbConfig = 'yoonic';
 //   public $hasMany = array( 'Movie' => array( 'className' => 'Movie', 'foreignKey' => 'channel_id') );
     
 }

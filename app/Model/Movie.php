@@ -15,21 +15,8 @@ class Movie extends AppModel {
  
 //use tbale movies
 //    public $useTable = 'movies';
-    var $name = 'Movie';
-    var $useDbConfig = 'yoonic';
-    var $useTable = 'Movies';
-    var $primaryKey = '';
-    var $cacheQueries = false; 
-    var $belongsTo = array('Channel' => array('className' => 'Channels'));
-//    var $name = 'Movie';
-//    var $actsAs = array('Searchable');
-//    var $validate = array(
-//        'title' => array(
-//            'rule' => array('minLength', 1)
-//        ),
-//        'body' => array(
-//            'rule' => array('minLength', 1)
-//        )
-//    );
+    public $useDbConfig = 'yoonic';
+
+
  
 }
