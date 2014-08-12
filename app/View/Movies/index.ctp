@@ -1,5 +1,4 @@
 <body>
-
     <div id='cssmenu'>
 
         <ul>
@@ -7,15 +6,22 @@
             <li> <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
             <li class = active> <?php echo $this->Html->link(__('Content'), array('controller' => 'movies', 'action' => 'index')); ?></li>
             <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
-
-        </ul>
+        </ul>    
     </div>
-
 </body>
-
-
-<h1>List of <?php echo $count ?> Movies</h1>
-<?php //echo $this->Html->link('Add Movie', array('controller' => 'movies', 'action' => 'add')); ?>
+<?php
+        echo $this->Form->create('User');
+        echo '<div><div id="searchText" style="width: 40%;float:left;margin-top: 3px;margin-left: 50px;">';
+        echo $this->Form->input('SearchParam');
+        echo '</div>';
+        echo '<div id="searchBtn" style="float: left;clear: none;padding: 0;">';
+        echo $this->Form->end('Search');
+        echo '</div></div>';
+        ?>
+<h3>List of <?php echo $count ?> Movies</h3>
+<?php 
+//echo "List of" .$count. "Movies";
+//echo $this->Html->link('Add Movie', array('controller' => 'movies', 'action' => 'add')); ?>
 <table>
     <tr>
         <th>Id</th>

@@ -1,4 +1,18 @@
 <!--<div class="apiUsers form">-->
+<body>
+
+    <div id='cssmenu'>
+
+        <ul>
+            <li> <?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index')); ?></li>
+            <li> <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
+            <li> <?php echo $this->Html->link(__('Content'), array('controller' => 'movies', 'action' => 'index')); ?></li>
+            <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+
+        </ul>
+    </div>
+
+</body>
 <?php echo $this->Form->create('Movie'); ?>
 <fieldset>
     <legend><?php echo __('Edit Movie -- '. $movie['Movie']['title']); ?></legend>
@@ -46,10 +60,10 @@
     echo $this->Form->input('cp');
     echo $this->Form->input('description', array('rows' => '5'));
     echo $this->Form->input('published', array("options" => array("0" => "Unpublished", "1" => "Published")));
-    echo "Created"; 
-    echo $this->Form->text('created', array("disabled" => "disabled"));
-    echo "Edited"; 
-    echo $this->Form->text('edited', array("disabled" => "disabled"));
+//    echo "Created"; 
+//    echo $this->Form->text('created', array("disabled" => "disabled"));
+//    echo "Edited"; 
+//    echo $this->Form->text('edited', array("disabled" => "disabled"));
     ?>
 </fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
