@@ -113,7 +113,7 @@ class MoviesController extends AppController {
 
         if ($this->Movie->delete($id)) {
             $this->Session->setFlash(
-                    __('The movie with title: %s has been deleted.', h($id))
+                    __('The movie has been deleted.', h($id))
                     
             );
             return $this->redirect(array('controller' => 'movies', 'action' => 'index'));

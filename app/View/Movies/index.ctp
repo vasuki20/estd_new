@@ -50,7 +50,8 @@
                 <?php echo $this->Html->link('Edit', array('action' => 'edit', $movie['Movie']['id']));
                 ?> | 
                 <?php
-                echo $this->Form->postLink('Delete', array('action' => 'delete', $movie['Movie']['id']), array('confirm' => 'Are you sure you want to delete movie, ' . $movie['Movie']['title'] . '?'));
+                //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $movie['Movie']['id']), array('confirm' => 'Are you sure you want to delete movie, ' . $movie['Movie']['title'] . '?'));
+                echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $movie['Movie']['id']), array('confirm' => 'Are you sure you want to delete movie, ' . $movie['Movie']['title']));
                 //  echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['u']['id']), null, __('Are you sure you want to delete # %s?', $User['u']['id']));
                 ?>       
             </td>
