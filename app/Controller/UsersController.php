@@ -134,6 +134,8 @@ where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$sea
                     __('The post with id: %s has been deleted.', h($id))
             );
             return $this->redirect(array('action' => 'index'));
+            
+           
         }
     }
 

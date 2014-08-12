@@ -1,3 +1,19 @@
+<body>
+
+    <div id='cssmenu'>
+
+        <ul>
+            <li> <?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index')); ?></li>
+            <li> <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
+            <li class = active> <?php echo $this->Html->link(__('Content'), array('controller' => 'movies', 'action' => 'index')); ?></li>
+            <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+
+        </ul>
+    </div>
+
+</body>
+
+
 <h1>List of <?php echo $count ?> Movies</h1>
 <?php //echo $this->Html->link('Add Movie', array('controller' => 'movies', 'action' => 'add')); ?>
 <table>
@@ -35,9 +51,11 @@
                 ?> | 
                 <?php
                 echo $this->Form->postLink('Delete', array('action' => 'delete', $movie['Movie']['id']), array('confirm' => 'Are you sure you want to delete movie, ' . $movie['Movie']['title'] . '?'));
+                //  echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['u']['id']), null, __('Are you sure you want to delete # %s?', $User['u']['id']));
                 ?>       
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
 <?php unset($movie); ?>
+

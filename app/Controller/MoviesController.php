@@ -35,7 +35,7 @@ class MoviesController extends AppController {
         $this->Movie->useDbConfig = 'yoonic';
 // query database and sort results
 
-        $data = $this->Movie->find('all');
+        $data = $this->Movie->find('all', array(limit =>100));
         $this->set('movies', $data);
 
 // get a count from the database
@@ -105,8 +105,21 @@ class MoviesController extends AppController {
         $this->request->data = $data;
     }
 
-    public function delete() {
-        
+    public function delete($id) {
+        print_r('Inside delete');
+        if ($this->request->is('get')) {
+            throw new MethodNotAllowedException();
+        }
+
+        if ($this->Movie->delete($id)) {
+            $this->Session->setFlash(
+                    __('The movie with title: %s has been deleted.', h($id))
+                    
+            );
+            return $this->redirect(array('controller' => 'movies', 'action' => 'index'));
+            
+              
+        }
     }
 
     public function view($id = NULL) {
