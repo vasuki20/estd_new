@@ -18,8 +18,8 @@ class Movie extends AppModel {
     var $name = 'Movie';
     var $useDbConfig = 'yoonic';
     var $useTable = 'Movies';
-var $primaryKey = '';
-var $cacheQueries = false; 
+    var $primaryKey = 'id';
+    var $cacheQueries = false; 
     var $belongsTo = array('Channel' => array('className' => 'Channel'));
 //    var $name = 'Movie';
 //    var $actsAs = array('Searchable');
