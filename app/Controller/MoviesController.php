@@ -36,42 +36,11 @@ class MoviesController extends AppController {
 // query database and sort results
 
         $data = $this->Movie->find('all', array(limit =>100));
-        // Search Action//       
-        $this->set('Movies', $this->Movie->query($data));
-        if ($this->request->is('post')) {
-            $this->log($this->request->data['Movie']['SearchParam'], 'debug');
-            if ($this->request->data) {
-                $searchParam = $this->request->data['Movie']['SearchParam'];
-                $searchQuery = "select * from movies and (id like '%$searchParam%' or title like '%$searchParam%' or channel like '%$searchParam%' )" . 'and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
-                $this->log($data, 'debug');
-                $this->set('Users', $this->User->query($data));
-            } else {
-                $this->Session->setFlash(__('Invalid Request'));
-            }
-        }
-        
-        $this->log($data, 'debug');
         $this->set('movies', $data);
 
 // get a count from the database
         $count = $this->Movie->find('count');
         $this->set('count', $count);
-        
-        // Search Action//       
-//        $this->set('Movies', $this->Movie->query($data));
-//        if ($this->request->is('post')) {
-//            $this->log($this->request->data['Movie']['SearchParam'], 'debug');
-//            if ($this->request->data) {
-//                $searchParam = $this->request->data['Movie']['SearchParam'];
-//                $searchQuery = "select * from movies and (id like '%$searchParam%' or title like '%$searchParam%' or channel like '%$searchParam%' )" . 'and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
-//                $this->log($data, 'debug');
-//                $this->set('Users', $this->User->query($data));
-//            } else {
-//                $this->Session->setFlash(__('Invalid Request'));
-//            }
-//        }
-//       
-        
     }
 
 // Search Action

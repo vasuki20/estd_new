@@ -7,129 +7,60 @@ App::uses('AppController', 'Controller', 'Configure');
  * @property Subscriber $Subscriber
  */
 class SubscribersController extends AppController {
+     public $components = array('Paginator');
+      public $paginate = array(
+        'limit' => 9,
+        'order' => array(
+            'Subscriber.id' => 'asc'
+        )
+    );
+    
+ public $helpers = array('Html', 'Form');
 
-/**
- * Models
- *
- * @var array
- */
-	public $uses = array('ApiUser', 'Subscriber','SessionToken');
-	
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('RequestHandler');
+    public function index() {
+        $this->Paginator->settings = $this->paginate;
 
-/**
- * verify_subscriber method
- * 
- * @return void
- */
-	public function verify_subscriber() {
-		if($this->request->query) {
-			$query = $this->request->query;
-			$subscriber = $this->Subscriber->verifysubscriber($query);
-		} else {
-			$subscriber = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscriber'));
-	}
-	
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		if($this->request->query) {
-			$query = $this->request->query;
-			$subscribers = $this->Subscriber->listSubscribers($query);
-		} else {
-			$subscribers = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscribers'));
-	}
+    // similar to findAll(), but fetches paged results
+    $data = $this->Paginator->paginate('Subscriber');
+      $this->set('Subscribers', $data);   
+      //  $this->set('Subscribers', $this->Subscriber->find('all'));
+      
+    }
+    public function view($id = null) {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid post'));
+        }
 
-/**
- * view method
- *
- * @param void
- * @return void
- */
-	public function view() {
-		if($this->request->query) {
-			$query = $this->request->query;
-			$subscriber = $this->Subscriber->viewSubscriber($query);
-		} else {
-			$subscriber = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscriber'));
-	}
+        $Subscribers = $this->Subscriber->findById($id);
+        if (!$Subscribers) {
+            throw new NotFoundException(__('Invalid post'));
+        }
+        $this->set('Subscriber', $Subscribers);
+        
+}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$subscriber = $this->Subscriber->addSubscriber($data);
-		} else {
-			$subscriber = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscriber'));
-	}
+public function edit($id = null) {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid post'));
+        }
 
-/**
- * edit method
- *
- * @param void
- * @return void
- */
-	public function edit() {
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$subscriber = $this->Subscriber->editSubscriber($data);
-		} else {
-			$subscriber = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscriber'));
-	}
+        $subscriber = $this->Subscriber->findById($id);
+        if (!$subscriber) {
+            throw new NotFoundException(__('Invalid post'));
+        }
 
+        if ($this->request->is(array('post', 'put'))) {
+            $this->Subscriber->id = $id;
+            if ($this->Subscriber->save($this->request->data)) {
+                $this->Session->setFlash(__('Your post has been updated.'));
+                return $this->redirect(array('action' => 'index'));
+            }
+            $this->Session->setFlash(__('Unable to update your post.'));
+        }
 
-/**
- * reset_vcode method
- *
- * @param void
- * @return void
-*/
-	public function reset_password() {
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$subscriber = $this->Subscriber->resetPassword($data);
-		} else {
-			$subscriber = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscriber'));
-	}
-
-/**
- * delete method
- *
- * @param string $id
- * @return void
- */
-	public function delete() {
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$subscriber = $this->Subscriber->deleteSubscriber($data);
-		} else {
-			$subscriber = $this->ApiUser->api_response("500", "Unauthorised");
-		}
-		$this->set(compact('subscriber'));
-	}
+        if (!$this->request->data) {
+            $this->request->data = $subscriber;
+        }
+    }
 
 }
