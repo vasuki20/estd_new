@@ -54,7 +54,11 @@ class MoviesController extends AppController {
                 $this->log($this->request->data['Movie']['SearchParam'], 'debug');
                 $searchParam=$this->request->data['Movie']['SearchParam'];
                 $this->Paginator->settings = array(
-                    'conditions' => array('Movie.title LIKE' => '%' . $searchParam . '%'),
+                    'conditions' => array(
+                        'OR' =>array('Movie.title LIKE' => '%' . $searchParam . '%',
+                        'Movie.id LIKE' => '%' . $searchParam . '%',
+                        'Channel.name LIKE' => '%' . $searchParam . '%')
+                        ),
                     'limit' => 10
                 );
                 $data = $this->Paginator->paginate('Movie');
