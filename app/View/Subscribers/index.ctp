@@ -98,10 +98,31 @@
 
         </table>
 
-        <?php echo $this->Paginator->numbers(); ?>    
-        <?php echo $this->Paginator->prev('« Previous', null, null, array('class' => 'disabled')); ?>
-        <?php echo $this->Paginator->next('Next »', null, null, array('class' => 'disabled')); ?>    
-        <?php echo $this->Paginator->counter(); ?>
+<?php
+// Shows the next and previous links
+echo '<div id="prev_btn">';
+echo $this->Paginator->prev(
+  '« Previous',
+  null,
+  null,
+  array('class' => 'disabled')
+);
+echo '</div>';
+echo '<div id="page_numbers">';
+// Shows the page numbers
+echo $this->Paginator->numbers();
+echo '</div>';
+echo '<div id="next_btn">';
+
+echo $this->Paginator->next(
+  'Next »',
+  null,
+  null,
+  array('class' => 'disabled')
+);
+echo '</div>';
+
+?>
 
 
 

@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller', 'Configure');
 class SubscribersController extends AppController {
      public $components = array('Paginator');
       public $paginate = array(
-        'limit' => 9,
+        'limit' => 10,
         'order' => array(
             'Subscriber.id' => 'asc'
         )

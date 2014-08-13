@@ -873,3 +873,18 @@ background: white !important;
 }
 
 
+div#prev_btn {
+float: left;
+margin-right: 30px;
+}
+
+div#page_numbers {
+float: left;
+margin-right: 30px;
+}
+
+div#next_btn {
+float: left;
+margin-right: 30px;
+}
+

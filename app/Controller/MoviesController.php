@@ -16,8 +16,18 @@ App::uses('AppController', 'Controller');
  */
 class MoviesController extends AppController {
 
+    public $components = array('Paginator','Session');
+
+    public $paginate = array(
+        'limit' => 10,
+        'order' => array(
+            'Movie.Title' => 'asc'
+        )
+    );
+    
+    
 // include the session componenet
-    public $components = array('Session');
+    //public $components = array('Session');
     var $uses = array('Movie');
 
     //$this->Movie->useDbConfig = 'admin';
@@ -32,15 +42,47 @@ class MoviesController extends AppController {
 //    );
 
     public function index() {
+        $this->Paginator->settings = $this->paginate;
         $this->Movie->useDbConfig = 'yoonic';
 // query database and sort results
 
-        $data = $this->Movie->find('all', array(limit =>100));
+        //$data = $this->Movie->find('all', array('limit' => 100));
+        $data = $this->Paginator->paginate('Movie');
+        // Search Action// 
+        if ($this->request->is('post')) {
+            if ($this->request->data) {
+                $this->log($this->request->data['Movie']['SearchParam'], 'debug');
+                $searchParam=$this->request->data['Movie']['SearchParam'];
+                $this->Paginator->settings = array(
+                    'conditions' => array('Movie.title LIKE' => '%' . $searchParam . '%'),
+                    'limit' => 10
+                );
+                $data = $this->Paginator->paginate('Movie');
+            } else {
+                $this->Session->setFlash(__('Invalid Request'));
+            }
+        }
+
         $this->set('movies', $data);
 
 // get a count from the database
         $count = $this->Movie->find('count');
         $this->set('count', $count);
+
+        // Search Action//       
+//        $this->set('Movies', $this->Movie->query($data));
+//        if ($this->request->is('post')) {
+//            $this->log($this->request->data['Movie']['SearchParam'], 'debug');
+//            if ($this->request->data) {
+//                $searchParam = $this->request->data['Movie']['SearchParam'];
+//                $searchQuery = "select * from movies and (id like '%$searchParam%' or title like '%$searchParam%' or channel like '%$searchParam%' )" . 'and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
+//                $this->log($data, 'debug');
+//                $this->set('Users', $this->User->query($data));
+//            } else {
+//                $this->Session->setFlash(__('Invalid Request'));
+//            }
+//        }
+//       
     }
 
 // Search Action

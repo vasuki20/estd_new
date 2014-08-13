@@ -5,13 +5,12 @@
             <li> <?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index')); ?></li>
             <li> <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
             <li class = active> <?php echo $this->Html->link(__('Content'), array('controller' => 'movies', 'action' => 'index')); ?></li>
-            <li> <?php echo $this->Html->link(__('Subcription'), array('controller' => 'subscribers', 'action' => 'index')); ?></li>
             <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
         </ul>    
     </div>
 </body>
 <?php
-        echo $this->Form->create('User');
+        echo $this->Form->create('Movie');
         echo '<div><div id="searchText" style="width: 40%;float:left;margin-top: 3px;margin-left: 50px;">';
         echo $this->Form->input('SearchParam');
         echo '</div>';
@@ -65,5 +64,30 @@
         </tr>
     <?php endforeach; ?>
 </table>
+<?php
+// Shows the next and previous links
+echo '<div id="prev_btn">';
+echo $this->Paginator->prev(
+  '« Previous',
+  null,
+  null,
+  array('class' => 'disabled')
+);
+echo '</div>';
+echo '<div id="page_numbers">';
+// Shows the page numbers
+echo $this->Paginator->numbers();
+echo '</div>';
+echo '<div id="next_btn">';
+
+echo $this->Paginator->next(
+  'Next »',
+  null,
+  null,
+  array('class' => 'disabled')
+);
+echo '</div>';
+
+?>
 <?php unset($movie); ?>
 
