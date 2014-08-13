@@ -72,32 +72,32 @@
                         <?php
                         echo $this->Html->link
                                 (
-                                $User['u']['id'], array('controller' => 'Users',
-                            'action' => 'view', $User['u']['id']
+                                $User['User']['id'], array('controller' => 'Users',
+                            'action' => 'view', $User['User']['id']
                                 )
                         );
                         ?>
                     </td>
-                    <td><?php echo $User['r']['Role']; ?></td>
-                    <td><?php echo $User['u']['FirstName']; ?></td>
-                    <td><?php echo $User['u']['LastName']; ?></td>
-                    <td><?php echo $User['u']['username']; ?> </td>
-                    <td style="max-width: 120px;"><?php echo $User['u']['emailId']; ?></td>
-                    <td style="max-width: 200px;"><?php echo $User['u']['password']; ?></td>
-                    <td><?php echo $User['u']['contactno']; ?></td>
-                    <td><?php echo $User['t']['Telconame']; ?></td>
-                    <td><?php echo $User['i']['IsActive']; ?></td>
+                    <td><?php echo $User['Role']['Role']; ?></td>
+                    <td><?php echo $User['User']['FirstName']; ?></td>
+                    <td><?php echo $User['User']['LastName']; ?></td>
+                    <td><?php echo $User['User']['username']; ?> </td>
+                    <td style="max-width: 120px;"><?php echo $User['User']['emailId']; ?></td>
+                    <td style="max-width: 200px;"><?php echo $User['User']['password']; ?></td>
+                    <td><?php echo $User['User']['contactno']; ?></td>
+                    <td><?php echo $User['Telconame']['Telconame']; ?></td>
+                    <td><?php echo $User['Isactive']['IsActive']; ?></td>
                     <td>
                         <?php
                         echo $this->Html->link(
-                                'Edit', array('action' => 'edit', $User['u']['id']));
+                                'Edit', array('action' => 'edit', $User['User']['id']));
                         ?>
                     </td>
                     <td>
 
     <?php
     if ($Role['Role'] == 'Admin') {
-        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['u']['id']), null, __('Are you sure you want to delete # %s?', $User['u']['id']));
+        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['User']['id']), null, __('Are you sure you want to delete # %s?', $User['User']['id']));
     }
     ?>
 
@@ -109,7 +109,31 @@
 <?php unset($User); ?>
         </table>
 
+<?php
+// Shows the next and previous links
+echo '<div id="prev_btn">';
+echo $this->Paginator->prev(
+  '« Previous',
+  null,
+  null,
+  array('class' => 'disabled')
+);
+echo '</div>';
+echo '<div id="page_numbers">';
+// Shows the page numbers
+echo $this->Paginator->numbers();
+echo '</div>';
+echo '<div id="next_btn">';
 
+echo $this->Paginator->next(
+  'Next »',
+  null,
+  null,
+  array('class' => 'disabled')
+);
+echo '</div>';
+
+?>
 
 
 

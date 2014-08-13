@@ -16,6 +16,8 @@ $Reports->constructClasses();
 
 class UsersController extends AppController {
 
+    public $components = array('Paginator','Session');
+
     public $helpers = array('Html', 'Form');
 
     public function login() {
@@ -36,29 +38,65 @@ class UsersController extends AppController {
 
     public function index() {
         $Role = AuthComponent::user('Role');
-        $this->log($Role['Role'], 'debug');
+                $this->log($Role, 'debug');
+
+        $Id = AuthComponent::user('id');
+        //$Role['Role'] => 'Admin'   ---  this is not working
+        $orCondition;
+        if ($Role['Role'] == 'Admin') {
+            $orCondition = array(
+                "OR" => array(
+                    1 => 1,
+                    'User.id' => $Id,
+                )
+            );
+        } else {
+            $orCondition = array(
+                'User.id' => $Id
+            );
+        }
+
+        $this->Paginator->settings = array(
+            'conditions' => $orCondition,
+            'limit' => 10,
+            'order' => array('User.id DESC')
+        );
 
         $this->set('Role', $Role);
 
-        $queryString = 'select u.id, r.Role, u.FirstName, u.LastName,u.username, u.emailId, u.password, u.contactno, t.Telconame, i.IsActive, u.created, u.modified
-from users u, Roles r, IsActives i, telconames t 
-where u.role=r.id and u.isactive=i.id and u.telconame=t.id and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
-        $this->log($queryString, 'debug');
-        $this->set('Users', $this->User->query($queryString));
+
+        //$data=$this->User->find('all', $options);
+        $data = $this->Paginator->paginate('User');
+        
+
         if ($this->request->is('post')) {
-            $this->log($this->request->data['User']['SearchParam'], 'debug');
             if ($this->request->data) {
+                $this->log($this->request->data['User']['SearchParam'], 'debug');
                 $searchParam = $this->request->data['User']['SearchParam'];
-                $searchQuery = "select u.id, r.Role, u.FirstName, u.LastName,u.username, u.emailId, u.password, u.contactno, t.Telconame, i.IsActive, u.created, u.modified
-from users u, Roles r, IsActives i, telconames t 
-where u.role=r.id and u.isactive=i.id and u.telconame=t.id and (u.id like '%$searchParam%' or u.FirstName like '%$searchParam%' or u.lastname like '%$searchParam%' or u.emailid like '%$searchParam%'"
-                        . " or t.telconame like '%$searchParam%' or r.role like '%$searchParam%' or i.isActive like '%$searchParam%')" . 'and ("' . $Role['Role'] . '"="Admin" or u.id=' . AuthComponent::user('id') . ') ORDER BY created DESC';
-                $this->log($searchQuery, 'debug');
-                $this->set('Users', $this->User->query($searchQuery));
+
+                $searchParamCondition = array(
+                    "OR" => array(
+                        'User.id LIKE' => "%$searchParam%",
+                        'User.FirstName LIKE' => "%$searchParam%",
+                        'User.lastname LIKE' => "%$searchParam%",
+                        'User.emailid LIKE' => "%$searchParam%",
+                        'Telconame.telconame LIKE' => "%$searchParam%",
+                        'Isactive.isActive LIKE' => "%$searchParam%",
+                        'Role.role LIKE' => "%$searchParam%",
+                    )
+                );
+                $this->Paginator->settings = array(
+                    'conditions' => array($orCondition,$searchParamCondition),
+                    'limit' => 10,
+                    'order' => array('User.id DESC')
+                );
+                $data = $this->Paginator->paginate('User');
             } else {
                 $this->Session->setFlash(__('Invalid Request'));
             }
         }
+        $this->set('Users', $data);
+        $this->log($data, 'debug');
     }
 
     public function add() {
