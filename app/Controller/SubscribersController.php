@@ -20,12 +20,29 @@ class SubscribersController extends AppController {
     public function index() {
         $this->Paginator->settings = $this->paginate;
 
-    // similar to findAll(), but fetches paged results
-    $data = $this->Paginator->paginate('Subscriber');
-      $this->set('Subscribers', $data);   
-      //  $this->set('Subscribers', $this->Subscriber->find('all'));
-      
+        
+        if ($this->request->is('post')) {
+            $this->log($this->request->data['Subscriber']['SearchParam'], 'debug');
+            if ($this->request->data) {
+                $searchParam=$this->request->data['Subscriber']['SearchParam'];
+                $this->Paginator->settings = array(
+                    'conditions' => array('Subscriber.msisdn LIKE' => '%'.$searchParam.'%'),
+                    'limit' => 10,
+                    'order' => array(
+                        'Subscriber.id' => 'asc'
+                    )
+                );
+            } else {
+                $this->Session->setFlash(__('Invalid Request'));
+            }
+        }
+        // similar to findAll(), but fetches paged results
+        $data = $this->Paginator->paginate('Subscriber');
+        $this->log($data, 'debug');
+        $this->set('Subscribers', $data);
+        //  $this->set('Subscribers', $this->Subscriber->find('all'));
     }
+
     public function view($id = null) {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
@@ -45,6 +62,7 @@ public function edit($id = null) {
         }
 
         $subscriber = $this->Subscriber->findById($id);
+        $this->log($subscriber, 'debug');
         if (!$subscriber) {
             throw new NotFoundException(__('Invalid post'));
         }
