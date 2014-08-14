@@ -15,7 +15,7 @@
             <ul>
                 <li> <?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index')); ?></li>
                 <li> <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
-                <li  class = active> <?php echo $this->Html->link(__('Subcription'), array('controller' => 'subscribers', 'action' => 'index')); ?></li>
+                <li  class = active> <?php echo $this->Html->link(__('Subscription'), array('controller' => 'subscribers', 'action' => 'index')); ?></li>
                 <li> <?php echo $this->Html->link(__('Content'), array('controller' => 'movies', 'action' => 'index')); ?></li>
                 <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
 

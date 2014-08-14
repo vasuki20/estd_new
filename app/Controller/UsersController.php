@@ -16,8 +16,7 @@ $Reports->constructClasses();
 
 class UsersController extends AppController {
 
-    public $components = array('Paginator','Session');
-
+    public $components = array('Paginator', 'Session');
     public $helpers = array('Html', 'Form');
 
     public function login() {
@@ -38,7 +37,7 @@ class UsersController extends AppController {
 
     public function index() {
         $Role = AuthComponent::user('Role');
-                $this->log($Role, 'debug');
+        $this->log($Role, 'debug');
 
         $Id = AuthComponent::user('id');
         //$Role['Role'] => 'Admin'   ---  this is not working
@@ -67,7 +66,7 @@ class UsersController extends AppController {
 
         //$data=$this->User->find('all', $options);
         $data = $this->Paginator->paginate('User');
-        
+
 
         if ($this->request->is('post')) {
             if ($this->request->data) {
@@ -86,7 +85,7 @@ class UsersController extends AppController {
                     )
                 );
                 $this->Paginator->settings = array(
-                    'conditions' => array($orCondition,$searchParamCondition),
+                    'conditions' => array($orCondition, $searchParamCondition),
                     'limit' => 10,
                     'order' => array('User.id' => 'DESC')
                 );
@@ -172,8 +171,6 @@ class UsersController extends AppController {
                     __('The post with id: %s has been deleted.', h($id))
             );
             return $this->redirect(array('action' => 'index'));
-            
-           
         }
     }
 
