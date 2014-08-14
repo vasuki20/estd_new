@@ -59,7 +59,7 @@ class UsersController extends AppController {
         $this->Paginator->settings = array(
             'conditions' => $orCondition,
             'limit' => 10,
-            'order' => array('User.id DESC')
+            'order' => array('User.id' => 'DESC')
         );
 
         $this->set('Role', $Role);
@@ -88,7 +88,7 @@ class UsersController extends AppController {
                 $this->Paginator->settings = array(
                     'conditions' => array($orCondition,$searchParamCondition),
                     'limit' => 10,
-                    'order' => array('User.id DESC')
+                    'order' => array('User.id' => 'DESC')
                 );
                 $data = $this->Paginator->paginate('User');
             } else {
