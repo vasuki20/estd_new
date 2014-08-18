@@ -21,7 +21,7 @@ echo $this->Form->input('status', array("options" =>
 )));
 echo $this->Form->input('name');
 echo $this->Form->input('address');
-echo $this->Form->input('telco_id');
+//echo $this->Form->input('telco_id');
 echo $this->Form->input('postal_code');
 echo $this->Form->end('Save');
 ?>
