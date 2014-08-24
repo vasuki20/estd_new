@@ -24,7 +24,7 @@
                 <li> <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
                 <li> <?php echo $this->Html->link(__('Subscription'), array('controller' => 'subscribers', 'action' => 'index')); ?></li>
                 <li> <?php echo $this->Html->link(__('Content'), array('controller' => 'movies', 'action' => 'index')); ?></li>
-                <li> <?php echo $this->Html->link( 'Unit Test', 'http://maxis.cs.yoonic.tv/yoonic-cis/unittest.php' ); ?></li>
+                <li> <?php echo $this->Html->link('Unit Test', 'http://maxis.cs.yoonic.tv/yoonic-cis/unittest.php'); ?></li>
                 <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
 
             </ul>
@@ -96,45 +96,38 @@
                     </td>
                     <td>
 
-    <?php
-    if ($Role['Role'] == 'Admin') {
-        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['User']['id']), null, __('Are you sure you want to delete # %s?', $User['User']['id']));
-    }
-    ?>
+                        <?php
+                        if ($Role['Role'] == 'Admin') {
+                            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['User']['id']), null, __('Are you sure you want to delete # %s?', $User['User']['id']));
+                        }
+                        ?>
 
                     </td>
 
                 </tr>
 
-<?php endforeach; ?>
-<?php unset($User); ?>
+            <?php endforeach; ?>
+            <?php unset($User); ?>
         </table>
 
-<?php
+        <?php
 // Shows the next and previous links
-echo '<div id="prev_btn">';
-echo $this->Paginator->prev(
-  '« Previous',
-  null,
-  null,
-  array('class' => 'disabled')
-);
-echo '</div>';
-echo '<div id="page_numbers">';
+        echo '<div id="prev_btn">';
+        echo $this->Paginator->prev(
+                '« Previous', null, null, array('class' => 'disabled')
+        );
+        echo '</div>';
+        echo '<div id="page_numbers">';
 // Shows the page numbers
-echo $this->Paginator->numbers();
-echo '</div>';
-echo '<div id="next_btn">';
+        echo $this->Paginator->numbers();
+        echo '</div>';
+        echo '<div id="next_btn">';
 
-echo $this->Paginator->next(
-  'Next »',
-  null,
-  null,
-  array('class' => 'disabled')
-);
-echo '</div>';
-
-?>
+        echo $this->Paginator->next(
+                'Next »', null, null, array('class' => 'disabled')
+        );
+        echo '</div>';
+        ?>
 
 
 

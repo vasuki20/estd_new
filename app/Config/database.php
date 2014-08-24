@@ -71,7 +71,7 @@ class DATABASE_CONFIG {
         'host' => 'localhost:3306',
         'login' => 'root',
         'password' => '9659465874a',
-        'database' => 'registration',
+        'database' => 'contents',
         'prefix' => '',
             //'encoding' => 'utf8',
     );
