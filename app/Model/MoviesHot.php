@@ -11,10 +11,10 @@ App::uses('AppModel', 'Model');
  * CakePHP Item
  * @author Teikpiew
  */
-class FeaturedImage extends AppModel {
+class MoviesHot extends AppModel {
  
     var $useDbConfig = 'contents';
-    var $useTable = 'featured_image';
+    var $useTable = 'movies_hot';
     var $primaryKey = 'id';
  
 }
