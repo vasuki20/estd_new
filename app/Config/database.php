@@ -71,6 +71,16 @@ class DATABASE_CONFIG {
         'host' => 'localhost:3306',
         'login' => 'root',
         'password' => '9659465874a',
+        'database' => 'registration',
+        'prefix' => '',
+            //'encoding' => 'utf8',
+    );
+    public $contents = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost:3306',
+        'login' => 'root',
+        'password' => '9659465874a',
         'database' => 'contents',
         'prefix' => '',
             //'encoding' => 'utf8',
