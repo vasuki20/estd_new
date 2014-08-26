@@ -53,6 +53,7 @@
             $action = "displayfeaturedimage";
         }
         ?>
+        <!-- Back to home -->
         <div style="margin-top: 8%;color: rgb(175, 10, 10);">
         <?php echo $this->Html->link('Back To ' . $controller, array('controller' => $controller, 'action' => $action)); ?>
         </div>
@@ -79,6 +80,7 @@
                     </td>
 
                 </tr>
+              
 
                     <?php endforeach; ?>
 <?php unset($movies); ?>

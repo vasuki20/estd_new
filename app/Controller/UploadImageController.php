@@ -58,9 +58,9 @@ public function display() {
                 //allowed image types
                 $imageTypes = array("image/gif", "image/jpeg", "image/png","image/pjpeg","image/x-png");
                 //upload folder - make sure to create one in webroot
-                $uploadFolder = "C:\xampp\htdocs";
+                $uploadFolder = "uploadimage";
                 //full path to upload folder
-                $uploadPath = WWW_ROOT . $uploadFolder;
+                $uploadPath = "C:/xampp/htdocs/" . $uploadFolder;
                
 
                 //check if image type fits one of allowed types
