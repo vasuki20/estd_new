@@ -19,8 +19,7 @@ class MoviesContentController extends AppController {
             'MoviesContent.Title' => 'asc'
         )
     );
-    var $uses = array('MoviesContent','MoviesFree','MoviesNew','MoviesHot','FeaturedImage');
-
+    var $uses = array('MoviesContent', 'MoviesFree', 'MoviesNew', 'MoviesHot', 'FeaturedImage');
     public function displaymovies($fromtablename) {
         $this->Paginator->settings = $this->paginate;
 // query database and sort results
@@ -32,8 +31,8 @@ class MoviesContentController extends AppController {
                 $this->log($this->request->data['MoviesContent']['SearchParam'], 'debug');
                 $searchParam = $this->request->data['MoviesContent']['SearchParam'];
                 $this->Paginator->settings = array(
-                'conditions' => array('MoviesContent.title LIKE' => '%' . $searchParam . '%'),
-                'limit' => 10);
+                    'conditions' => array('MoviesContent.title LIKE' => '%' . $searchParam . '%'),
+                    'limit' => 10);
                 $data = $this->Paginator->paginate('MoviesContent');
             } else {
                 $this->Session->setFlash(__('Invalid Request'));
@@ -47,12 +46,11 @@ class MoviesContentController extends AppController {
         $this->set('count', $count);
         $this->set('fromtablename', $fromtablename);
     }
-    
-    public function select($id = NULL, $fromtablename=NULL) {
+
+    public function select($id = NULL, $fromtablename = NULL) {
         if (!$id) {
             throw new NotFoundException(__("ID was not set."));
         }
-
         // search the database based on the id (primary key) of the item 
         $data = $this->MoviesContent->findById($id);
 
@@ -71,43 +69,41 @@ class MoviesContentController extends AppController {
             if ($this->request->data['MoviesContent']['target'] == "movies_free") {
                 $this->MoviesFree->create();
                 $this->MoviesFree->save($movieData);
-                $redirectController='MoviesFree';
-                $redirectAction='displaymoviesfree';
-                $redirectMsg='Movie added succefully to MovieFree table';
+                $redirectController = 'MoviesFree';
+                $redirectAction = 'displaymoviesfree';
+                $redirectMsg = 'Movie added succefully to MovieFree table';
             } else if ($this->request->data['MoviesContent']['target'] == "movies_hot") {
                 $this->MoviesHot->create();
                 $this->MoviesHot->save($movieData);
-                $redirectController='MoviesHot';
-                $redirectAction='displaymovieshot';
-                $redirectMsg='Movie added succefully to MovieHot table';
+                $redirectController = 'MoviesHot';
+                $redirectAction = 'displaymovieshot';
+                $redirectMsg = 'Movie added succefully to MovieHot table';
             } else if ($this->request->data['MoviesContent']['target'] == "movies_new") {
                 $this->MoviesNew->create();
                 $this->MoviesNew->save($movieData);
-                $redirectController='MoviesNew';
-                $redirectAction='displaymoviesnew';
-                $redirectMsg='Movie added succefully to MovieNew table';
-            }
-            else if ($this->request->data['MoviesContent']['target'] == "featured_image") {
+                $redirectController = 'MoviesNew';
+                $redirectAction = 'displaymoviesnew';
+                $redirectMsg = 'Movie added succefully to MovieNew table';
+            } else if ($this->request->data['MoviesContent']['target'] == "featured_image") {
                 $this->FeaturedImage->create();
                 $this->FeaturedImage->save($movieData);
-                $redirectController='FeaturedImage';
-                $redirectAction='displayfeaturedimage';
-                $redirectMsg='Movie added succefully to FeaturedImage table';
+                $redirectController = 'FeaturedImage';
+                $redirectAction = 'displayfeaturedimage';
+                $redirectMsg = 'Movie added succefully to FeaturedImage table';
             }
             $this->Session->setFlash(__($redirectMsg));
-            return $this->redirect(array('controller' => $redirectController,'action' => $redirectAction));
+            return $this->redirect(array('controller' => $redirectController, 'action' => $redirectAction));
         }
 
         // set the variable to display the query results
         $this->set('movie', $data);
         $this->set('fromtablename', $fromtablename);
     }
-    
-    public function submit($id = NULL, $fromtablename=NULL) {
+
+    public function submit($id = NULL, $fromtablename = NULL) {
         if (!$id) {
             throw new NotFoundException(__("ID was not set."));
         }
-
         // search the database based on the id (primary key) of the item 
         $data = $this->MoviesContent->findById($id);
         if (!$data) {
@@ -116,7 +112,7 @@ class MoviesContentController extends AppController {
         if ($this->request->is('post')) {
             $this->log($this->request->data, 'debug');
             $movieData = array(
-                'name' => '$name', 
+                'name' => '$name',
                 'city' => '$city'
             );
 //            $this->MoviesNew->create();
@@ -132,8 +128,6 @@ class MoviesContentController extends AppController {
         $this->set('movie', $data);
         $this->set('fromtablename', $fromtablename);
     }
-    
-        
 
 }
 

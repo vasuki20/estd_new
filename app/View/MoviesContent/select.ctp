@@ -29,7 +29,7 @@ if ($fromtablename == "movies_free") {
         <li> <?php echo $this->Html->link('Back To ' . $controller, array('controller' => $controller, 'action' => $action)); ?></li>
     </ul>
 </div>
-<!--*******-->
+<!<!--*******-->
 <?php
 if ($fromtablename != "featured_image") {
     echo '<div>';
@@ -59,7 +59,6 @@ if ($fromtablename == "movies_free") {
     $tableName = "Featured Image";
 }
 ?>
-
 <div style="margin-top: 8%;margin-left: 33%;color: rgb(175, 10, 10);">
     Clicking submit will save the movie in  <?php echo $tableName; ?>
 </div>

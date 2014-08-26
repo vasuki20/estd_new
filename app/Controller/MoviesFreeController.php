@@ -33,7 +33,6 @@ class MoviesFreeController extends AppController {
         $count = $this->MoviesFree->find('count');
         $this->set('count', $count);
     }
-    
 
 }
 

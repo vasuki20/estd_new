@@ -46,8 +46,7 @@
             $tableName = "Movies New";
             $controller = "MoviesNew";
             $action = "displaymoviesnew";
-        }
-          else if ($fromtablename == "featured_image") {
+        } else if ($fromtablename == "featured_image") {
             $tableName = "Featured Image";
             $controller = "FeaturedImage";
             $action = "displayfeaturedimage";
@@ -55,7 +54,7 @@
         ?>
         <!-- Back to home -->
         <div style="margin-top: 8%;color: rgb(175, 10, 10);">
-        <?php echo $this->Html->link('Back To ' . $controller, array('controller' => $controller, 'action' => $action)); ?>
+            <?php echo $this->Html->link('Back To ' . $controller, array('controller' => $controller, 'action' => $action)); ?>
         </div>
         <div style="margin-left: 33%;color: rgb(175, 10, 10);">
             Please select a movie to insert in  <?php echo $tableName; ?> table
@@ -68,42 +67,42 @@
             </tr>
             <!-- Here is where we loop through our $posts array, printing out post info -->
 
-<?php foreach ($movies as $movie): ?>
+            <?php foreach ($movies as $movie): ?>
 
                 <tr>
                     <td><?php echo $movie['MoviesContent']['id']; ?></td>
                     <td><?php echo $movie['MoviesContent']['title']; ?></td>
                     <td>
-    <?php
-    echo $this->Html->link('Select', array('controller' => 'MoviesContent', 'action' => 'select', $movie['MoviesContent']['id'], $fromtablename));
-    ?>
+                        <?php
+                        echo $this->Html->link('Select', array('controller' => 'MoviesContent', 'action' => 'select', $movie['MoviesContent']['id'], $fromtablename));
+                        ?>
                     </td>
 
                 </tr>
-              
 
-                    <?php endforeach; ?>
-<?php unset($movies); ?>
+
+            <?php endforeach; ?>
+            <?php unset($movies); ?>
         </table>
 
-            <?php
+        <?php
 // Shows the next and previous links
-            echo '<div id="prev_btn">';
-            echo $this->Paginator->prev(
-                    '« Previous', null, null, array('class' => 'disabled')
-            );
-            echo '</div>';
-            echo '<div id="page_numbers">';
+        echo '<div id="prev_btn">';
+        echo $this->Paginator->prev(
+                '« Previous', null, null, array('class' => 'disabled')
+        );
+        echo '</div>';
+        echo '<div id="page_numbers">';
 // Shows the page numbers
-            echo $this->Paginator->numbers();
-            echo '</div>';
-            echo '<div id="next_btn">';
+        echo $this->Paginator->numbers();
+        echo '</div>';
+        echo '<div id="next_btn">';
 
-            echo $this->Paginator->next(
-                    'Next »', null, null, array('class' => 'disabled')
-            );
-            echo '</div>';
-            ?>
+        echo $this->Paginator->next(
+                'Next »', null, null, array('class' => 'disabled')
+        );
+        echo '</div>';
+        ?>
 
 
 

@@ -12,7 +12,7 @@ echo $this->Session->flash();
         echo $this->Form->input('image', array('type' => 'file'));
     ?>
     </fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Save')); ?>
 
 </div>
 <div class="image-display">

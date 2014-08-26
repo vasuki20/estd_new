@@ -11,7 +11,6 @@
         </ul>    
     </div>
 </body>
-
 <?php
 //echo "List of" .$count. "Movies";
 echo $this->Html->link('Add Movie', array('controller' => 'MoviesContent', 'action' => 'displaymovies', 'movies_hot'));
@@ -21,14 +20,14 @@ echo $this->Html->link('Add Movie', array('controller' => 'MoviesContent', 'acti
         <th>Id</th>
         <th>Movie Id</th>
     </tr>
-<?php foreach ($movies as $movie): ?>
+    <?php foreach ($movies as $movie): ?>
         <tr>
             <td><?php echo h($movie['MoviesHot']['id']); ?></td>
 
             <td><?php echo $movie['MoviesHot']['movie_id']; ?></td>
 
         </tr>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </table>
 <?php
 // Shows the next and previous links
