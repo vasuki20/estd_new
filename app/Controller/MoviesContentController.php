@@ -19,7 +19,7 @@ class MoviesContentController extends AppController {
             'MoviesContent.Title' => 'asc'
         )
     );
-    var $uses = array('MoviesContent','MoviesFree','MoviesNew','MoviesHot');
+    var $uses = array('MoviesContent','MoviesFree','MoviesNew','MoviesHot','FeaturedImage');
 
     public function displaymovies($fromtablename) {
         $this->Paginator->settings = $this->paginate;
@@ -87,6 +87,13 @@ class MoviesContentController extends AppController {
                 $redirectAction='displaymoviesnew';
                 $redirectMsg='Movie added succefully to MovieNew table';
             }
+            else if ($this->request->data['MoviesContent']['target'] == "featured_image") {
+                $this->FeaturedImage->create();
+                $this->FeaturedImage->save($movieData);
+                $redirectController='FeaturedImage';
+                $redirectAction='displayfeaturedimage';
+                $redirectMsg='Movie added succefully to FeaturedImage table';
+            }
             $this->Session->setFlash(__($redirectMsg));
             return $this->redirect(array('controller' => $redirectController,'action' => $redirectAction));
         }
@@ -144,7 +151,6 @@ class MoviesContentController extends AppController {
 //        $adminRoles = $this->Role->find('all');
 //        $isactives = $this->Isactive->find('all');
     }
-
 
 }
 

@@ -3,29 +3,30 @@
 
         <ul>
             <li> <?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index')); ?></li>
-            <li> <?php echo $this->Html->link(__('Movies Free'), array('controller' => 'MoviesFree', 'action' => 'displaymoviesfree')); ?></li>
-            <li class = "active"> <?php echo $this->Html->link(__('Movies hot'), array('controller' => 'MoviesHot', 'action' => 'displaymovieshot')); ?></li>
+            <li class = "active"> <?php echo $this->Html->link(__('Movies Free'), array('controller' => 'MoviesFree', 'action' => 'displaymoviesfree')); ?></li>
+            <li> <?php echo $this->Html->link(__('Movies hot'), array('controller' => 'MoviesHot', 'action' => 'displaymovieshot')); ?></li>
             <li> <?php echo $this->Html->link(__('Movies New'), array('controller' => 'MoviesNew', 'action' => 'displaymoviesnew')); ?></li>
             <li> <?php echo $this->Html->link(__('Featured Image'), array('controller' => 'FeaturedImage', 'action' => 'displayfeaturedimage')); ?></li>
             <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
         </ul>    
     </div>
 </body>
-
 <?php
 //echo "List of" .$count. "Movies";
-echo $this->Html->link('Add Movie', array('controller' => 'MoviesContent', 'action' => 'displaymovies', 'movies_hot'));
+echo $this->Html->link('Add Movie', array('controller' => 'MoviesContent', 'action' => 'displaymovies', 'featured_image'));
 ?>
 <table>
     <tr>
         <th>Id</th>
+        <th>Image URL</th>
         <th>Movie Id</th>
     </tr>
+ 
 <?php foreach ($movies as $movie): ?>
         <tr>
-            <td><?php echo h($movie['MoviesHot']['id']); ?></td>
-
-            <td><?php echo $movie['MoviesHot']['movie_id']; ?></td>
+            <td><?php echo h($movie['FeaturedImage']['id']); ?></td>
+            <td><?php echo h($movie['FeaturedImage']['img_url']); ?></td>
+            <td><?php echo $movie['FeaturedImage']['movie_id']; ?></td>
 
         </tr>
 <?php endforeach; ?>
