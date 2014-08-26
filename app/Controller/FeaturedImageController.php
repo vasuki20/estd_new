@@ -31,7 +31,7 @@ class FeaturedImageController extends AppController {
                 //upload folder - make sure to create one in webroot
                 $uploadFolder = "uploadimage";
                 //full path to upload folder
-                $uploadPath = "C:/xampp/htdocs/" . $uploadFolder;
+                $uploadPath = "/Applications/XAMPP/htdocs/" . $uploadFolder;
                
 
                 //check if image type fits one of allowed types

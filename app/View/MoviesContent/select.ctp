@@ -31,22 +31,15 @@ if ($fromtablename == "movies_free") {
 </div>
 <!<!--*******-->
 <?php
-if ($fromtablename != "featured_image") {
-    echo '<div>';
-    echo $this->Form->create('MoviesContent');
-    echo $this->Form->input('id', array('value' => $movie['MoviesContent']['id'], 'readonly' => 'readonly', 'type' => 'text'));
-    echo $this->Form->input('title', array('value' => $movie['MoviesContent']['title'], 'readonly' => 'readonly'));
-    echo $this->Form->hidden('target', array('value' => $fromtablename, 'display' => '$tableName'));
-    echo $this->Form->end('Save');
-} else {
-    echo '<div>';
-    echo $this->Form->create('MoviesContent');
-    echo $this->Form->input('Upload Image', array('type' => 'file','controller' => 'featuredimage', 'action' => 'display'));
-    echo $this->Form->input('id', array('value' => $movie['MoviesContent']['id'], 'readonly' => 'readonly', 'type' => 'text'));
-    echo $this->Form->input('title', array('value' => $movie['MoviesContent']['title'], 'readonly' => 'readonly'));
-    echo $this->Form->hidden('target', array('value' => $fromtablename, 'display' => 'none'));
-    echo $this->Form->end('Save');
+echo '<div>';
+echo $this->Form->create('MoviesContent', array('enctype' => 'multipart/form-data'));
+if ($fromtablename == "featured_image") {
+    echo $this->Form->input('image', array('type' => 'file','accept' => 'image/*'));
 }
+echo $this->Form->input('id', array('value' => $movie['MoviesContent']['id'], 'readonly' => 'readonly', 'type' => 'text'));
+echo $this->Form->input('title', array('value' => $movie['MoviesContent']['title'], 'readonly' => 'readonly'));
+echo $this->Form->hidden('target', array('value' => $fromtablename, 'display' => 'none'));
+echo $this->Form->end('Save');
 ?>
 <?php
 if ($fromtablename == "movies_free") {
