@@ -41,8 +41,7 @@ if ($fromtablename != "featured_image") {
 } else {
     echo '<div>';
     echo $this->Form->create('MoviesContent');
-    echo $this->Form->input('Upload Image', array('type' => 'file'));
-//echo $this->Html->link(__('Home'), array('controller' => 'FeaturedImage','action' => 'display'));
+    echo $this->Form->input('Upload Image', array('type' => 'file','controller' => 'featuredimage', 'action' => 'display'));
     echo $this->Form->input('id', array('value' => $movie['MoviesContent']['id'], 'readonly' => 'readonly', 'type' => 'text'));
     echo $this->Form->input('title', array('value' => $movie['MoviesContent']['title'], 'readonly' => 'readonly'));
     echo $this->Form->hidden('target', array('value' => $fromtablename, 'display' => 'none'));

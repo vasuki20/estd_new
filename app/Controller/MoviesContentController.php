@@ -116,7 +116,7 @@ class MoviesContentController extends AppController {
         if ($this->request->is('post')) {
             $this->log($this->request->data, 'debug');
             $movieData = array(
-                'name' => '$name',
+                'name' => '$name', 
                 'city' => '$city'
             );
 //            $this->MoviesNew->create();
@@ -133,24 +133,7 @@ class MoviesContentController extends AppController {
         $this->set('fromtablename', $fromtablename);
     }
     
-        public function add() {
-        $message = "Notification: New report submitted!";
-        $this->set('Telconame', $this->User->Telconame->find('list', array('fields' => array('Telconame'))));
-        $this->set('Role', $this->User->Role->find('list', array('fields' => array('Role'))));
-        $this->set('Isactive', $this->User->Isactive->find('list', array('fields' => array('Isactive'))));
-        if ($this->request->is('post')) {
-            $this->User->create();
-            $this->log($this->request->data, 'debug');
-            if ($this->User->save($this->request->data)) {
-                echo '$this->request->data';
-                $this->Session->setFlash(__('Your User has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-            }
-            $this->Session->setFlash(__('Unable to add your User.'));
-        }
-//        $adminRoles = $this->Role->find('all');
-//        $isactives = $this->Isactive->find('all');
-    }
+        
 
 }
 
