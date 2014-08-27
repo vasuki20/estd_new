@@ -29,7 +29,7 @@ if ($fromtablename == "movies_free") {
         <li> <?php echo $this->Html->link('Back To ' . $controller, array('controller' => $controller, 'action' => $action)); ?></li>
     </ul>
 </div>
-<!<!--*******-->
+<!--*******-->
 <?php
 echo '<div>';
 echo $this->Form->create('MoviesContent', array('enctype' => 'multipart/form-data'));

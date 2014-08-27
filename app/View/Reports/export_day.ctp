@@ -11,7 +11,6 @@
 <h2><?php  echo __('Reports');?></h2>
 
 	<h2>All Subscription</h2> 
-
 	<h3>Daily <?php echo $today_start;?> to <?php echo $today;?></h3>
 	<table>
 	<th><td>Qty</td><td>Earning</td></th>

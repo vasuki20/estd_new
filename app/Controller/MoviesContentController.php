@@ -24,7 +24,7 @@ class MoviesContentController extends AppController {
         $this->Paginator->settings = $this->paginate;
 // query database and sort results
         //$data = $this->Movie->find('all', array('limit' => 100));
-        $data = $this->Paginator->paginate('MoviesContent');
+         $data = $this->Paginator->paginate('MoviesContent');
         // Search Action// 
         if ($this->request->is('post')) {
             if ($this->request->data) {
@@ -54,7 +54,6 @@ class MoviesContentController extends AppController {
         }
         // search the database based on the id (primary key) of the item 
         $data = $this->MoviesContent->findById($id);
-
         if (!$data) {
             throw new NotFoundException(__("ID was not in the Database."));
         }
@@ -96,11 +95,11 @@ class MoviesContentController extends AppController {
                     //allowed image types
                     $imageTypes = array("image/gif", "image/jpeg", "image/png", "image/pjpeg", "image/x-png","image/jpg");
                     //upload folder - make sure to create one in webroot
-                    $uploadFolder = "uploadimage";
+                    $uploadFolder = "/home/yoonic/www/yoonic/images/featured";
                     //full path to upload folder
-                    $uploadPath = "/Applications/XAMPP/htdocs/cakephp-2.5.2/" . $uploadFolder;
-
-
+                    $uploadPath = "http://maxis.ms.yoonic.tv/" . $uploadFolder;
+                    
+                    
                     //check if image type fits one of allowed types
                     foreach ($imageTypes as $type) {
                         //check if there wasn't errors uploading file on serwer
@@ -144,18 +143,16 @@ class MoviesContentController extends AppController {
                 {
                     $movieData = array(
                         'movie_id' => $this->request->data['MoviesContent']['id'],
-                        'img_url' => $this->request->data['MoviesContent']['image']
+                        'img_url' => $full_image_path,
                     );
                     $this->FeaturedImage->create();
                     $this->FeaturedImage->save($movieData);
                     $redirectMsg = 'Movie added succefully to FeaturedImage table';
                     $this->Session->setFlash(__($redirectMsg));
-                    return;
                 }
                 $redirectController = 'FeaturedImage';
                 $redirectAction = 'displayfeaturedimage';
-                
-                
+               
             }
             $this->Session->setFlash(__($redirectMsg));
             return $this->redirect(array('controller' => $redirectController, 'action' => $redirectAction));
@@ -165,6 +162,18 @@ class MoviesContentController extends AppController {
         $this->set('movie', $data);
         $this->set('fromtablename', $fromtablename);
     }
+    
+ public function view($id = null) {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid post'));
+        }
+
+        $post = $this->MoviesContent->findById($id);
+        if (!$moviescontent) {
+            throw new NotFoundException(__('Invalid post'));
+        }
+        $this->set('moviescontent', $moviescontent);
+    }   
 
 }
 

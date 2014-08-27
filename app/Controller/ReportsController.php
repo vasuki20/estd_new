@@ -24,7 +24,8 @@ class ReportsController extends AppController {
 		$result=$this->ApiUser->checkAdminPowers();
 
 		//Initialize date and time
-		$today = date('Y-m-d') . " 00:00:00"; 
+		$today = date('d-m-Y',strtotime("-1 days")) . " 00:00:00";
+                $this->log($this->request->data, 'debug');
 		$cd = strtotime($today);
 		$last_week = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd), date('d',$cd) - 7, date('Y',$cd))) . " 23:59:59";
 
@@ -359,13 +360,13 @@ class ReportsController extends AppController {
 	public function export_day() 
     {	
     	//Initialize date and time
-		$today = date('Y-m-d') . " 23:59:59"; 
-		$today_start = date('Y-m-d') . " 00:00:00"; 
+		$today = date('Y-m-d',strtotime("-1 days")) . " 23:59:59"; //changed to day before date
+		$today_start = date('Y-m-d',strtotime("-1 days")) . " 00:00:00"; 
 		$cd = strtotime($today);
 
 		$chargeable_keywords = array('ON BAD', 'ON BAW', 'ON PRD', 'ON PRW', 'ON TP1');
 				
-		$last_month = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd) - ((date('d',$cd) == date('d',1) ? 1 : 0) ), date('d',1), date('Y',$cd))) . " 00:00:00";
+		$last_month = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd) - ((date('d',$cd)-1 == date('d',1) ? 1 : 0) ), date('d',1), date('Y',$cd))) . " 00:00:00";
 			
 		$telco_id = 1; //default this to 1 for maxis
 			
@@ -478,18 +479,23 @@ class ReportsController extends AppController {
 			$this->layout = false;
 			$this->render(false);
 		}
+                
+                $this->response->download("export_day.csv");
+ 		$data = $this->Subscriber->find('all');
+		$this->set(compact('data'));
+ 		$this->layout = 'ajax';
+ 		return;
 
     }
-
 	public function export_week() 
     {	
     	//Initialize date and time
-		$today = date('Y-m-d') . " 23:59:59"; 
+		$today = date('Y-m-d',strtotime("-3 days")) . " 23:59:59"; //Changed to last week 
 		$day = date('D');
 		$today_start = date('Y-m-d') . " 00:00:00"; 
 		$cd = strtotime($today);
-		$last_week = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd), date('d',$cd) - 7, date('Y',$cd))) . " 00:00:00";
-		$last_week_short = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd), date('d',$cd) - 7, date('Y',$cd)));
+		$last_week = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd), date('d',$cd) - 6, date('Y',$cd))) . " 00:00:00";
+		$last_week_short = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd), date('d',$cd) - 6, date('Y',$cd)));
 
 		$last_month = date('Y-m-d', mktime(date('h',$cd), date('i',$cd), date('s',$cd), date('m',$cd) - ((date('d',$cd) == date('d',1) ? 1 : 0) ), date('d',1), date('Y',$cd))) . " 00:00:00";
 
@@ -1391,7 +1397,7 @@ class ReportsController extends AppController {
 			
 	
 	}
-
+// end of export() function
 	public function overallReportPdf(){
 
 		$total_subscribers = $this->Subscriber->find("count");
