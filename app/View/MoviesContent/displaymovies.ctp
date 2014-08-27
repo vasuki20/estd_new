@@ -10,7 +10,6 @@
         <title>CSS MenuMaker</title>
     </head>
     <body>
-
         <div id='cssmenu'>
 
             <ul>

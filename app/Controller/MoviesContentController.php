@@ -94,11 +94,11 @@ class MoviesContentController extends AppController {
                 if ($this->data['MoviesContent']['image']) {
                     $image = $this->data['MoviesContent']['image'];
                     //allowed image types
-                    $imageTypes = array("image/gif", "image/jpeg", "image/png", "image/pjpeg", "image/x-png");
+                    $imageTypes = array("image/gif", "image/jpeg", "image/png", "image/pjpeg", "image/x-png","image/jpg");
                     //upload folder - make sure to create one in webroot
                     $uploadFolder = "uploadimage";
                     //full path to upload folder
-                    $uploadPath = "/Users/Karthik/Desktop/" . $uploadFolder;
+                    $uploadPath = "C:/xampp/htdocs/" . $uploadFolder;
 
 
                     //check if image type fits one of allowed types
