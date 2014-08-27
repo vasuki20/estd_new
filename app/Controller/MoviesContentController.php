@@ -98,45 +98,39 @@ class MoviesContentController extends AppController {
                     //upload folder - make sure to create one in webroot
                     $uploadFolder = "uploadimage";
                     //full path to upload folder
-                    $uploadPath = "C:/xampp/htdocs/" . $uploadFolder;
+                    $uploadPath = "/Applications/XAMPP/htdocs/cakephp-2.5.2/" . $uploadFolder;
 
 
                     //check if image type fits one of allowed types
                     foreach ($imageTypes as $type) {
-                        if ($type == $image['type']) {
-                            //check if there wasn't errors uploading file on serwer
-                            if ($image['error'] == 0) {
-                                //image file name
-                                $imageName = $image['name'];
-                                //check if file exists in upload folder
-                                if (file_exists($uploadPath . '/' . $imageName)) {
-                                    //create full filename with timestamp
-                                    $imageName = date('His') . $imageName;
-                                }
-                                //create full path with image name
-                                $full_image_path = $uploadPath . '/' . $imageName;
-                                $this->log($full_image_path, 'debug');
-                                $this->log($imageName, 'debug');
-                                //upload image to upload folder
-                                if (move_uploaded_file($image['tmp_name'], $full_image_path)) {
-                                    $this->Session->setFlash('File saved successfully');
-                                    $this->set('imageName', $imageName);
-                                } else {
-                                    $redirectMsg='There was a problem uploading file. Please try again.';
-                                    $error=1;
-                                }
-                            } else {
-                                $redirectMsg='Error uploading file.';
-                                $error=1;
+                        //check if there wasn't errors uploading file on serwer
+                        if ($image['error'] == 0) {
+                            //image file name
+                            $imageName = $image['name'];
+                            //check if file exists in upload folder
+                            if (file_exists($uploadPath . '/' . $imageName)) {
+                                //create full filename with timestamp
+                                $imageName = date('His') . $imageName;
                             }
-                            break;
+                            //create full path with image name
+                            $full_image_path = $uploadPath . '/' . $imageName;
+                            $this->log($full_image_path, 'debug');
+                            $this->log($imageName, 'debug');
+                            //upload image to upload folder
+                            if (move_uploaded_file($image['tmp_name'], $full_image_path)) {
+                                $this->Session->setFlash('File saved successfully');
+                                $this->set('imageName', $imageName);
+                            } else {
+                                $redirectMsg = 'There was a problem uploading file. Please try again.';
+                                $error = 1;
+                            }
                         } else {
-                            $redirectMsg='Unacceptable file type';
-                            $error=1;
+                            $redirectMsg = 'Error uploading file.';
+                            $error = 1;
                         }
+                        break;
                     }
-                }
-                else
+                } else
                 {
                     $redirectMsg='Please select a file';
                     $error=1;
