@@ -869,13 +869,10 @@ text-decoration: none;
   background: url('images/bg.png');
   color: rgb(221, 221, 221);
 }
-
 li.logoutMenu {
 float: right !important;
 background: white !important;
 }
-
-
 div#prev_btn {
 float: left;
 margin-right: 30px;
@@ -918,4 +915,5 @@ margin-right: 30px;
   background-image: linear-gradient(to bottom, #7f878c, #5c6266);
   text-decoration: none;
 }
+
 
