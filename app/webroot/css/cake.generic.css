@@ -890,4 +890,32 @@ div#next_btn {
 float: left;
 margin-right: 30px;
 }
+// adding button //
+
+.btn {
+  background: #eff4f7;
+  background-image: -webkit-linear-gradient(top, #eff4f7, #acb0b3);
+  background-image: -moz-linear-gradient(top, #eff4f7, #acb0b3);
+  background-image: -ms-linear-gradient(top, #eff4f7, #acb0b3);
+  background-image: -o-linear-gradient(top, #eff4f7, #acb0b3);
+  background-image: linear-gradient(to bottom, #eff4f7, #acb0b3);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #4f464f;
+  font-size: 15px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #7f878c;
+  background-image: -webkit-linear-gradient(top, #7f878c, #5c6266);
+  background-image: -moz-linear-gradient(top, #7f878c, #5c6266);
+  background-image: -ms-linear-gradient(top, #7f878c, #5c6266);
+  background-image: -o-linear-gradient(top, #7f878c, #5c6266);
+  background-image: linear-gradient(to bottom, #7f878c, #5c6266);
+  text-decoration: none;
+}
 

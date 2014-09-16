@@ -479,14 +479,15 @@ class ReportsController extends AppController {
 			$this->layout = false;
 			$this->render(false);
 		}
-                
+                           
+    }
+    public function export_day_csv(){
                 $this->response->download("export_day.csv");
  		$data = $this->Subscriber->find('all');
 		$this->set(compact('data'));
  		$this->layout = 'ajax';
  		return;
-
-    }
+               }
 	public function export_week() 
     {	
     	//Initialize date and time

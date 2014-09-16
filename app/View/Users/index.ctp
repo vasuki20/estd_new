@@ -35,103 +35,100 @@
         </div>
 
     </body>
-    <html>
-
-
-
+</html>
+<?php
+echo $this->Form->create('User');
+echo '<div><div id="searchText" style="width: 40%;float:left;margin-top: 3px;margin-left: 70px;">';
+echo $this->Form->input('SearchParam');
+echo '</div>';
+echo '<div id="searchBtn" style="float: left;clear: none;padding: 0;">';
+echo $this->Form->end('Search');
+echo '</div></div>';
+?>
+<?php $this->log($Users, 'debug'); ?>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Role</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Username</th>
+        <th>EmailID</th>
+        <th>Password</th>
+        <th>ContactNo</th>
+        <th>Telconame</th>
+        <th>IsActive</th>
+        <th>Edit</th>
         <?php
-        echo $this->Form->create('User');
-        echo '<div><div id="searchText" style="width: 40%;float:left;margin-top: 3px;margin-left: 70px;">';
-        echo $this->Form->input('SearchParam');
-        echo '</div>';
-        echo '<div id="searchBtn" style="float: left;clear: none;padding: 0;">';
-        echo $this->Form->end('Search');
-        echo '</div></div>';
+        if ($Role['Role'] == 'Admin') {
+            echo '<th>Delete</th>';
+        }
         ?>
-        <?php $this->log($Users, 'debug'); ?>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Role</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Username</th>
-                <th>EmailID</th>
-                <th>Password</th>
-                <th>ContactNo</th>
-                <th>Telconame</th>
-                <th>IsActive</th>
-                <th>Edit</th>
+    </tr>
+    <!-- Here is where we loop through our $posts array, printing out post info -->
+
+    <?php foreach ($Users as $User): ?>
+
+        <tr>
+            <td>
+                <?php
+                echo $this->Html->link
+                        (
+                        $User['User']['id'], array('controller' => 'Users',
+                    'action' => 'view', $User['User']['id']
+                        )
+                );
+                ?>
+            </td>
+            <td><?php echo $User['Role']['Role']; ?></td>
+            <td><?php echo $User['User']['FirstName']; ?></td>
+            <td><?php echo $User['User']['LastName']; ?></td>
+            <td><?php echo $User['User']['username']; ?> </td>
+            <td style="max-width: 120px;"><?php echo $User['User']['emailId']; ?></td>
+            <td style="max-width: 200px;"><?php echo $User['User']['password']; ?></td>
+            <td><?php echo $User['User']['contactno']; ?></td>
+            <td><?php echo $User['Telconame']['Telconame']; ?></td>
+            <td><?php echo $User['Isactive']['IsActive']; ?></td>
+            <td>
+                <?php
+                echo $this->Html->link(
+                        'Edit', array('action' => 'edit', $User['User']['id']));
+                ?>
+            </td>
+            <td>
+
                 <?php
                 if ($Role['Role'] == 'Admin') {
-                    echo '<th>Delete</th>';
+                    echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['User']['id']), null, __('Are you sure you want to delete # %s?', $User['User']['id']));
                 }
                 ?>
-            </tr>
-            <!-- Here is where we loop through our $posts array, printing out post info -->
 
-            <?php foreach ($Users as $User): ?>
+            </td>
 
-                <tr>
-                    <td>
-                        <?php
-                        echo $this->Html->link
-                                (
-                                $User['User']['id'], array('controller' => 'Users',
-                            'action' => 'view', $User['User']['id']
-                                )
-                        );
-                        ?>
-                    </td>
-                    <td><?php echo $User['Role']['Role']; ?></td>
-                    <td><?php echo $User['User']['FirstName']; ?></td>
-                    <td><?php echo $User['User']['LastName']; ?></td>
-                    <td><?php echo $User['User']['username']; ?> </td>
-                    <td style="max-width: 120px;"><?php echo $User['User']['emailId']; ?></td>
-                    <td style="max-width: 200px;"><?php echo $User['User']['password']; ?></td>
-                    <td><?php echo $User['User']['contactno']; ?></td>
-                    <td><?php echo $User['Telconame']['Telconame']; ?></td>
-                    <td><?php echo $User['Isactive']['IsActive']; ?></td>
-                    <td>
-                        <?php
-                        echo $this->Html->link(
-                                'Edit', array('action' => 'edit', $User['User']['id']));
-                        ?>
-                    </td>
-                    <td>
+        </tr>
 
-                        <?php
-                        if ($Role['Role'] == 'Admin') {
-                            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $User['User']['id']), null, __('Are you sure you want to delete # %s?', $User['User']['id']));
-                        }
-                        ?>
+    <?php endforeach; ?>
+    <?php unset($User); ?>
+</table>
 
-                    </td>
-
-                </tr>
-
-            <?php endforeach; ?>
-            <?php unset($User); ?>
-        </table>
-
-        <?php
+<?php
 // Shows the next and previous links
-        echo '<div id="prev_btn">';
-        echo $this->Paginator->prev(
-                '« Previous', null, null, array('class' => 'disabled')
-        );
-        echo '</div>';
-        echo '<div id="page_numbers">';
+echo '<div id="prev_btn">';
+echo $this->Paginator->prev(
+        '« Previous', null, null, array('class' => 'disabled')
+);
+echo '</div>';
+echo '<div id="page_numbers">';
 // Shows the page numbers
-        echo $this->Paginator->numbers();
-        echo '</div>';
-        echo '<div id="next_btn">';
+echo $this->Paginator->numbers();
+echo '</div>';
+echo '<div id="next_btn">';
 
-        echo $this->Paginator->next(
-                'Next »', null, null, array('class' => 'disabled')
-        );
-        echo '</div>';
-        ?>
+echo $this->Paginator->next(
+        'Next »', null, null, array('class' => 'disabled')
+);
+echo '</div>';
+?>
 
 
 
