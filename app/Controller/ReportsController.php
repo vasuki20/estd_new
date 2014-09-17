@@ -478,16 +478,23 @@ class ReportsController extends AppController {
 		} else {
 			$this->layout = false;
 			$this->render(false);
-		}
-                           
+		}  
     }
-    public function export_day_csv(){
-                $this->response->download("export_day.csv");
- 		$data = $this->Subscriber->find('all');
-		$this->set(compact('data'));
- 		$this->layout = 'ajax';
- 		return;
-               }
+    
+    public function export_day_csv() {
+    $this->viewClass = 'Media';
+    // Render app/webroot/files/example.docx
+    $params = array(
+        'id'        => '09_16_14subscription_daily.csv',
+        'name'      => 'subscription_daily',
+        'extension' => 'csv',
+        'mimeType'  => array(
+            'csv' => ''
+        ),
+        'path'      => 'C:\xampp\htdocs\log\reports'.DS
+    );
+    $this->set($params);
+}
 	public function export_week() 
     {	
     	//Initialize date and time

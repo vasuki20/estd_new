@@ -49,7 +49,7 @@
         <tr><td>ON PRW</td><td><?php echo sizeof($daily['NEW']["ON PRW"]); ?></td></tr>
     </table>
 </div>
-<div id='btn'>
+<div class='btn'>
  <ul>
 <?php echo $this->Html->link(__('Save as CSV'), array('controller' => 'reports', 'action' => 'export_day_csv')) ; ?>
  </ul>
