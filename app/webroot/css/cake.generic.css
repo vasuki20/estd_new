@@ -917,3 +917,17 @@ margin-right: 30px;
 }
 
 
+.saveAsBtn{
+    background-color: rgb(170, 159, 159);
+color: white;
+padding-right: 2%;
+padding-left: 2%;
+padding-top: 6px;
+padding-bottom: 6px;
+text-decoration: none;
+}
+
+a.saveAsBtn:hover {
+color: white;
+background-color: rgb(114, 111, 111);
+}

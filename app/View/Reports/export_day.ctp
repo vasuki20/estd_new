@@ -4,6 +4,7 @@
         <li class = active> <?php echo $this->Html->link(__('Daily Report'), array('controller' => 'reports', 'action' => 'export_day/display')); ?></li>
         <?php echo "<li >" . $this->Html->link(__('Weekly Report'), array('controller' => 'reports', 'action' => 'export_week/display')) . "</li>"; ?></li>
         <?php echo "<li >" . $this->Html->link(__('Monthly Report'), array('controller' => 'reports', 'action' => 'export_month/display')) . "</li>"; ?></li>
+        <?php echo "<li >" . $this->Html->link(__('Monthly Report'), array('controller' => 'reports', 'action' => 'export_month/display')) . "</li>"; ?></li>
         <li class="logoutMenu"> <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
     </ul>
 </div>
@@ -49,8 +50,4 @@
         <tr><td>ON PRW</td><td><?php echo sizeof($daily['NEW']["ON PRW"]); ?></td></tr>
     </table>
 </div>
-<div class='btn'>
- <ul>
-<?php echo $this->Html->link(__('Save as CSV'), array('controller' => 'reports', 'action' => 'export_day_csv')) ; ?>
- </ul>
-</div>
+<?php echo $this->Html->link(__('Save as CSV'), array('controller' => 'reports', 'action' => 'export_day_csv'), array('class' => 'saveAsBtn')) ; ?>

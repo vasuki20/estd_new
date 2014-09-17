@@ -1,14 +1,14 @@
 <?php
 App::uses('AppController', 'Controller');
-
-
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
 /**
  * Reports Controller
  *
  * @property Report $Report
  */
-class ReportsController extends AppController {
 
+class ReportsController extends AppController {
 	public $uses = array('Subscription', 'Subscriber', 'ApiUser', 'Log', 'Receipt');
 
 	function beforeFilter() 
@@ -484,16 +484,20 @@ class ReportsController extends AppController {
     public function export_day_csv() {
     $this->viewClass = 'Media';
     // Render app/webroot/files/example.docx
+    $this->log('debug log', 'debug');
+    $dailyFileName=$this->getLatestFileName('daily');
+    $this->log($dailyFileName, 'debug');
     $params = array(
-        'id'        => '09_16_14subscription_daily.csv',
+        'id'        => $dailyFileName,
         'name'      => 'subscription_daily',
         'extension' => 'csv',
         'mimeType'  => array(
             'csv' => ''
         ),
-        'path'      => 'C:\xampp\htdocs\log\reports'.DS
+        'path'      => 'C:\Users\Vasuki\Desktop\testPHP'.DS
     );
     $this->set($params);
+    
 }
 	public function export_week() 
     {	
@@ -1702,6 +1706,26 @@ class ReportsController extends AppController {
 		$this->layout = 'pdf'; //this will use the pdf.ctp layout 
 		$this->render(); 
         } 
+        
+     public function getLatestFileName($type)
+     {
+        $dir = new Folder('C:\Users\Vasuki\Desktop\testPHP');
+        $files = $dir->find('.*'.$type.'.csv');
+        $latestdate=0;
+        $latestFile='';
+        $this->log($files, 'debug');
+        foreach ($files as $fileString) {
+            $file = new File($dir->pwd() . DS . $fileString);
+            $currentFileDate = $file->lastChange();
+            if($currentFileDate > $latestdate)
+            {
+             $latestdate = $currentFileDate;
+             $latestFile = $fileString;
+            }  
+            $file->close(); // Be sure to close the file when you're done
+        }
+        return $latestFile;
+     }
 
 
 }
