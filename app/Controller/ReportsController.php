@@ -489,12 +489,12 @@ class ReportsController extends AppController {
     $this->log($dailyFileName, 'debug');
     $params = array(
         'id'        => $dailyFileName,
-        'name'      => 'subscription_daily',
+        'name'      => $dailyFileName,
         'extension' => 'csv',
         'mimeType'  => array(
             'csv' => ''
         ),
-        'path'      => 'C:\Users\Vasuki\Desktop\testPHP'.DS
+        'path'      => 'C:\xampp\htdocs\log\reports'.DS
     );
     $this->set($params);
     
@@ -629,6 +629,26 @@ class ReportsController extends AppController {
 		}
 
     }
+    
+     public function export_weekly_csv() {
+    $this->viewClass = 'Media';
+    // Render app/webroot/files/example.docx
+    $this->log('debug log', 'debug');
+    $weeklyFileName=$this->getLatestFileName('weekly');
+    $this->log($weeklyFileName, 'debug');
+    $params = array(
+        'id'        => $weeklyFileName,
+        'name'      => $weeklyFileName,
+        'extension' => 'csv',
+        'mimeType'  => array(
+            'csv' => ''
+        ),
+        'path'      => 'C:\xampp\htdocs\log\reports'.DS
+    );
+    $this->set($params);
+    
+}
+
 
 	public function export_month() 
     {	
@@ -753,9 +773,26 @@ class ReportsController extends AppController {
 			$this->layout = false;
 			$this->render(false);
 		}
-
     }
-
+                
+    public function export_monthly_csv() {
+    $this->viewClass = 'Media';
+    // Render app/webroot/files/example.docx
+    $this->log('debug log', 'debug');
+    $monthlyFileName=$this->getLatestFileName('monthly');
+    $this->log($monthlyFileName, 'debug');
+    $params = array(
+        'id'        => $monthlyFileName,
+        'name'      => $monthlyFileName,
+        'extension' => 'csv',
+        'mimeType'  => array(
+            'csv' => ''
+        ),
+        'path'      => 'C:\xampp\htdocs\log\reports'.DS
+    );
+    $this->set($params);
+    
+}
 	
 	public function export() 
     {
@@ -1709,7 +1746,7 @@ class ReportsController extends AppController {
         
      public function getLatestFileName($type)
      {
-        $dir = new Folder('C:\Users\Vasuki\Desktop\testPHP');
+        $dir = new Folder('C:\xampp\htdocs\log\reports');
         $files = $dir->find('.*'.$type.'.csv');
         $latestdate=0;
         $latestFile='';

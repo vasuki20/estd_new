@@ -19,15 +19,15 @@ class User extends AppModel {
             'order' => ''
         ),
         'Isactive' => array(
-            'className' => 'IsActive',
-            'foreignKey' => 'IsActive',
+            'className' => 'Isactive',
+            'foreignKey' => 'Isactive',
             'conditions' => '',
             'fields' => '',
             'order' => ''
         ),
         'Telconame' => array(
-            'className' => 'TelcoName',
-            'foreignKey' => 'TelcoName',
+            'className' => 'Telconame',
+            'foreignKey' => 'Telconame',
             'conditions' => '',
             'fields' => '',
             'order' => ''

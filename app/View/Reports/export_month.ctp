@@ -53,5 +53,5 @@
 	</table>
 
 </div>
-
+<?php echo $this->Html->link(__('Save as CSV'), array('controller' => 'reports', 'action' => 'export_monthly_csv'), array('class' => 'saveAsBtn')) ; ?>
 

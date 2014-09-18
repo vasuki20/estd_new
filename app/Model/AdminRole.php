@@ -1,4 +1,5 @@
 <?php
+
 App::uses('AppModel', 'Model');
 /**
  * AdminRole Model
@@ -6,11 +7,10 @@ App::uses('AppModel', 'Model');
  * @property Admin $Admin
  */
 class AdminRole extends AppModel {
+ var $useTable = false;
 
-	$useTable = false;
-	
-	public $_schema = array(
-		'id' => array('type'=>'numeric');
-	);
+public $_schema = array(
+'id' => array('type' => 'numeric')
+);
 
 }
